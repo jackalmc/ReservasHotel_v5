@@ -71,5 +71,9 @@ public class Huespedes implements IHuespedes {
 
         coleccionHuespedes.remove(huesped);
     }
+    @Override
+    public void comenzar(){}
+    @Override
+    public void terminar(){}
 
 }

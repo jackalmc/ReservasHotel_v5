@@ -131,5 +131,9 @@ public class Habitaciones implements IHabitaciones {
         coleccionHabitaciones.remove(habitacion);
 
     }
+    @Override
+    public void comenzar(){}
+    @Override
+    public void terminar(){}
 
 }

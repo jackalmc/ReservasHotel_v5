@@ -194,4 +194,8 @@ public class Reservas implements IReservas {
 
         reserva.setCheckOut(fecha);
     }
+    @Override
+    public void comenzar(){}
+    @Override
+    public void terminar(){}
 }
