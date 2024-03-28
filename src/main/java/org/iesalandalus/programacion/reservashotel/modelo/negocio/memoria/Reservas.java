@@ -130,6 +130,21 @@ public class Reservas implements IReservas {
         return copiaEspecial;
     }
     @Override
+    public List<Reserva> getReservas(Habitacion habitacion){
+        if (coleccionReservas==null)
+            throw new NullPointerException("La colección no ha sido creada aún");
+        if (habitacion==null)
+            throw new NullPointerException("ERROR: No se pueden buscar reservas de una habitación nula.");
+
+        List<Reserva> copiaEspecial = new ArrayList<>();
+
+        for (Reserva reserva: coleccionReservas)
+            if (reserva.getHabitacion().equals(habitacion))
+                copiaEspecial.add(reserva);
+
+        return copiaEspecial;
+    }
+    @Override
     public List<Reserva> getReservasFuturas(Habitacion habitacion){
         if (coleccionReservas==null)
             throw new NullPointerException("La colección no ha sido creada aún");
