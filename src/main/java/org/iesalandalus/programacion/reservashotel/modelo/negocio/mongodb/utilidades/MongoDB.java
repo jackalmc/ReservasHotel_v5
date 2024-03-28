@@ -57,13 +57,13 @@ public class MongoDB {
     public static final String CHECKOUT = "checkout";
     public static final String PRECIO_RESERVA = "precio_reserva";
     public static final String NUMERO_PERSONAS = "numero_personas";
-    private MongoClient conexion = null; // static?
+    private static MongoClient conexion = null; // static?
 
     private MongoDB(){
         establecerConexion();
     }
 
-    public MongoDatabase getBD(){
+    public static MongoDatabase getBD(){
         if (conexion == null)
             throw new NullPointerException("Conexión es nula");
 
@@ -74,11 +74,11 @@ public class MongoDB {
         conexion = MongoClients.create(SERVIDOR);
     }
 
-    public void cerrarconexion(){
+    public static void cerrarConexion(){
         conexion.close();
     }
 
-    public Document getDocumento(Huesped huesped){
+    public static Document getDocumento(Huesped huesped){
         /* (Document) getBD().getCollection("huespedes").
                 find(eq(DNI, huesped.getDni())).first() */
         return new Document("_id", new ObjectId())
@@ -89,7 +89,7 @@ public class MongoDB {
                 .append(FECHA_NACIMIENTO, huesped.getFechaNacimiento());
     }
 
-    public Huesped getHuesped(Document documentoHuesped){
+    public static Huesped getHuesped(Document documentoHuesped){
         return new Huesped(
                 documentoHuesped.getString(NOMBRE),
                 documentoHuesped.getString(DNI),
@@ -99,7 +99,7 @@ public class MongoDB {
         );
     }
 
-    public Document getDocumento(Habitacion habitacion){
+    public static Document getDocumento(Habitacion habitacion){
         /* (Document) getBD().getCollection("habitaciones").
                 find(eq(IDENTIFICADOR, habitacion.getIdentificador())).first() */
 
@@ -142,7 +142,7 @@ public class MongoDB {
         }else return null;
     }
 
-    public Habitacion getHabitacion(Document documentoHabitacion){
+    public static Habitacion getHabitacion(Document documentoHabitacion){
         Habitacion habitacion = null;
 
         switch (documentoHabitacion.getString(TIPO)){
@@ -177,14 +177,7 @@ public class MongoDB {
         return habitacion;
     }
 
-    public Document getDocumento(Reserva reserva){
-        /* (Document) getBD().getCollection("reservas").
-                find(
-                        Filters.and(
-                        eq(HABITACION_IDENTIFICADOR, reserva.getHabitacion().getIdentificador()),
-                        eq(FECHA_INICIO_RESERVA, reserva.getFechaInicioReserva())
-                        )
-                ).first() */
+    public static Document getDocumento(Reserva reserva){
 
         return new Document("_id", new ObjectId())
                 .append(HUESPED, getDocumento(reserva.getHuesped()))
@@ -196,7 +189,7 @@ public class MongoDB {
 
     }
 
-    public Reserva getReserva(Document documentoReserva){
+    public static Reserva getReserva(Document documentoReserva){
         return new Reserva(
                 (Huesped) documentoReserva.get(HUESPED),
                 (Habitacion) documentoReserva.get(HABITACION),
