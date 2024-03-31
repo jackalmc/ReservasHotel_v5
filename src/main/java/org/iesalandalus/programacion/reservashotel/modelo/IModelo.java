@@ -11,30 +11,30 @@ import java.util.List;
 
 public interface IModelo {
 
-    public void comenzar();
-    public void terminar();
+    void comenzar();
+    void terminar();
 
-    public List<Huesped> getHuespedes();
-    public void insertar(Huesped huesped) throws OperationNotSupportedException;
-    public Huesped buscar(Huesped huesped);
-    public void borrar(Huesped huesped) throws OperationNotSupportedException;
+    List<Huesped> getHuespedes();
+    void insertar(Huesped huesped) throws OperationNotSupportedException;
+    Huesped buscar(Huesped huesped);
+    void borrar(Huesped huesped) throws OperationNotSupportedException;
 
-    public void insertar(Habitacion habitacion) throws OperationNotSupportedException;
-    public Habitacion buscar(Habitacion habitacion);
-    public void borrar(Habitacion habitacion) throws OperationNotSupportedException;
-    public List<Habitacion> getHabitaciones();
-    public List<Habitacion> getHabitaciones(TipoHabitacion tipoHabitacion);
+    void insertar(Habitacion habitacion) throws OperationNotSupportedException;
+    Habitacion buscar(Habitacion habitacion);
+    void borrar(Habitacion habitacion) throws OperationNotSupportedException;
+    List<Habitacion> getHabitaciones();
+    List<Habitacion> getHabitaciones(TipoHabitacion tipoHabitacion);
 
-    public void insertar(Reserva reserva) throws OperationNotSupportedException;
-    public Reserva buscar(Reserva reserva);
-    public void borrar(Reserva reserva) throws OperationNotSupportedException;
-    public List<Reserva> getReservas();
-    public List<Reserva> getReservas(Huesped huesped);
-    public List<Reserva> getReservas(TipoHabitacion tipoHabitacion);
-    public List<Reserva> getReservas(Habitacion habitacion);
-    public List<Reserva> getReservasFuturas(Habitacion habitacion);
+    void insertar(Reserva reserva) throws OperationNotSupportedException;
+    Reserva buscar(Reserva reserva);
+    void borrar(Reserva reserva) throws OperationNotSupportedException;
+    List<Reserva> getReservas();
+    List<Reserva> getReservas(Huesped huesped);
+    List<Reserva> getReservas(TipoHabitacion tipoHabitacion);
+    List<Reserva> getReservas(Habitacion habitacion);
+    List<Reserva> getReservasFuturas(Habitacion habitacion);
 
-    public void realizarCheckin(Reserva reserva, LocalDateTime fecha);
-    public void realizarCheckout(Reserva reserva, LocalDateTime fecha);
+    void realizarCheckin(Reserva reserva, LocalDateTime fecha);
+    void realizarCheckout(Reserva reserva, LocalDateTime fecha);
 
 }
