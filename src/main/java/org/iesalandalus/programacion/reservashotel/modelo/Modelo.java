@@ -4,6 +4,7 @@ import org.iesalandalus.programacion.reservashotel.modelo.dominio.Habitacion;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.Huesped;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.TipoHabitacion;
+import org.iesalandalus.programacion.reservashotel.modelo.negocio.IFuenteDatos;
 import org.iesalandalus.programacion.reservashotel.modelo.negocio.IHabitaciones;
 import org.iesalandalus.programacion.reservashotel.modelo.negocio.IHuespedes;
 import org.iesalandalus.programacion.reservashotel.modelo.negocio.IReservas;
@@ -15,25 +16,40 @@ import javax.naming.OperationNotSupportedException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class Modelo {
+public class Modelo implements IModelo{
 
     private static IHabitaciones habitaciones;
     private static IReservas reservas;
     private static IHuespedes huespedes;
+    private IFuenteDatos fuenteDatos;
 
 
-    public Modelo(){
-        habitaciones = new Habitaciones();
-        reservas = new Reservas();
-        huespedes = new Huespedes();
+    public Modelo(FactoriaFuenteDatos factoriaFuenteDatos){
+        if (factoriaFuenteDatos == null)
+            throw new NullPointerException("No se puede asignar una fuente nula");
+
+        setFuenteDatos(factoriaFuenteDatos.crear());
+        comenzar();
     }
 
     public void comenzar(){
-
+        habitaciones = fuenteDatos.crearHabitaciones();
+        reservas = fuenteDatos.crearReservas();
+        huespedes = fuenteDatos.crearHuespedes();
     }
 
     public void terminar(){
+        habitaciones.terminar();
+        reservas.terminar();
+        huespedes.terminar();
         System.out.println("*** Modelo ha pasado a mejor vida! ***");
+    }
+
+    public void setFuenteDatos(IFuenteDatos fuenteDatos) {
+        if (fuenteDatos == null)
+            throw new NullPointerException("No se puede asignar una fuente nula");
+
+        this.fuenteDatos = fuenteDatos;
     }
 
     public void insertar(Huesped huesped) throws OperationNotSupportedException {
@@ -95,6 +111,10 @@ public class Modelo {
 
     public List<Reserva> getReservas(TipoHabitacion tipoHabitacion){
         return reservas.getReservas(tipoHabitacion);
+    }
+
+    public List<Reserva> getReservas(Habitacion habitacion){
+        return reservas.getReservas(habitacion);
     }
 
     public List<Reserva> getReservasFuturas(Habitacion habitacion){

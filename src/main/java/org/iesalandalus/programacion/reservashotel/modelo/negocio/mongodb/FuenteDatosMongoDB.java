@@ -8,7 +8,7 @@ import org.iesalandalus.programacion.reservashotel.modelo.negocio.IReservas;
 public class FuenteDatosMongoDB implements IFuenteDatos {
 
     @Override
-    public IHuespedes crearHuespedes(){ //todo quizás query a la BD por la base de datos?
+    public IHuespedes crearHuespedes(){
         return new Huespedes();
     }
     @Override
