@@ -1,27 +1,22 @@
 package org.iesalandalus.programacion.reservashotel.modelo.negocio.mongodb.utilidades;
 
+import com.mongodb.*;
 import com.mongodb.client.*;
 import com.mongodb.client.MongoDatabase;
 
-import com.mongodb.client.model.Filters;
 import org.bson.types.ObjectId;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.*;
-
 import org.bson.Document;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static com.mongodb.client.model.Filters.eq;
 
 public class MongoDB {
 
     public static final DateTimeFormatter FORMATO_DIA = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static final DateTimeFormatter FORMATO_DIA_HORA = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
-    private static final String SERVIDOR = "mongodb+srv://<username>:<password>@reservashotel.kd0h77u.mongodb.net/?retryWrites=true&w=majority&appName=reservashotel";
-
+    private static final String SERVIDOR = "reservashotel.kd0h77u.mongodb.net";
     private static final int PUERTO = 27017;
     private static final String BD = "reservashotel";
     private static final String USUARIO = "reservashotel";
@@ -60,7 +55,7 @@ public class MongoDB {
     private static MongoClient conexion = null; // static?
 
     private MongoDB(){
-        establecerConexion();
+
     }
 
     public static MongoDatabase getBD(){
@@ -70,8 +65,18 @@ public class MongoDB {
         return conexion.getDatabase(BD);
     }
 
-    private void establecerConexion(){
-        conexion = MongoClients.create(SERVIDOR);
+    public static void establecerConexion(){
+        String connectionString = "mongodb://"+USUARIO+":"+CONTRASENA+"@"+BD+"."+SERVIDOR+":"+PUERTO;
+        ServerApi serverApi = ServerApi.builder()
+                .version(ServerApiVersion.V1)
+                .build();
+        MongoClientSettings settings = MongoClientSettings.builder()
+                .applyConnectionString(new ConnectionString(connectionString))
+                .serverApi(serverApi)
+                .build();
+        // Create a new client and connect to the server
+       conexion = MongoClients.create(settings);
+
     }
 
     public static void cerrarConexion(){
@@ -79,8 +84,6 @@ public class MongoDB {
     }
 
     public static Document getDocumento(Huesped huesped){
-        /* (Document) getBD().getCollection("huespedes").
-                find(eq(DNI, huesped.getDni())).first() */
         return new Document("_id", new ObjectId())
                 .append(NOMBRE, huesped.getNombre())
                 .append(DNI, huesped.getDni())
@@ -100,9 +103,6 @@ public class MongoDB {
     }
 
     public static Document getDocumento(Habitacion habitacion){
-        /* (Document) getBD().getCollection("habitaciones").
-                find(eq(IDENTIFICADOR, habitacion.getIdentificador())).first() */
-
         if (habitacion instanceof Simple){
             return new Document("_id",new ObjectId())
                     .append(IDENTIFICADOR, habitacion.getIdentificador())

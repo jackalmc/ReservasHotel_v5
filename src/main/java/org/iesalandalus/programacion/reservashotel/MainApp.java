@@ -3,7 +3,9 @@ package org.iesalandalus.programacion.reservashotel;
 
 import org.iesalandalus.programacion.reservashotel.controlador.Controlador;
 import org.iesalandalus.programacion.reservashotel.modelo.FactoriaFuenteDatos;
+import org.iesalandalus.programacion.reservashotel.modelo.IModelo;
 import org.iesalandalus.programacion.reservashotel.modelo.Modelo;
+import org.iesalandalus.programacion.reservashotel.modelo.negocio.mongodb.utilidades.MongoDB;
 import org.iesalandalus.programacion.reservashotel.vista.Vista;
 
 
@@ -17,17 +19,29 @@ public class MainApp {
     }
 
     public static Modelo procesarArgumentosFuenteDatos(String[] args){
-        if (args[1].isBlank())
-            System.out.println("Este programa no se puede ejecutar sin parámetros de inicio.");
-        if (args[1].equalsIgnoreCase("-fdmemoria"))
-            return new Modelo(FactoriaFuenteDatos.MEMORIA);
-        if (args[1].equalsIgnoreCase("-fdmongodb"))
-            return new Modelo(FactoriaFuenteDatos.MONGODB);
-        //todo crear menu en caso de argumentos no válidos.
+        Modelo modeloADevoler=null;
+        try {
+            if (args[0].isBlank()) {
+                System.out.println("\n*********************************************");
+                System.out.println("*** Necesito argumentos para funcionar!!! ***");
+                System.out.println("*********************************************\n");
+                System.exit(0);
+            }
+            if (args[0].equalsIgnoreCase("-fdmemoria"))
+                modeloADevoler = new Modelo(FactoriaFuenteDatos.MEMORIA);
+            if (args[0].equalsIgnoreCase("-fdmongodb")) {
+                MongoDB.establecerConexion(); //Esto hace que lo tenga que poner público. Mantiene la conexión abierta con la app.
+                modeloADevoler = new Modelo(FactoriaFuenteDatos.MONGODB);
+            }
+                //todo crear menu en caso de argumentos no válidos??.
 
-        else{
-            System.out.println("No hay argumentos");
-            return null;
+            return modeloADevoler;
+
+        } catch (ArrayIndexOutOfBoundsException|NullPointerException e){
+            System.out.println(e.getMessage());
+            System.exit(0);
         }
+
+        return modeloADevoler;
     }
 }
