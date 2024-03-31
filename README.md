@@ -1,5 +1,5 @@
 # Tarea: Reservas Hotel V4
-## Profesor: Andrés Rubio
+## Profesor: Andrés Rubio del Río
 ## Alumno: Juan José Almagro Cabrera
 
 Nuestro cliente está muy satisfecho de como está quedando la aplicación. Sin embargo, nos acaba de comentar que por favor 
