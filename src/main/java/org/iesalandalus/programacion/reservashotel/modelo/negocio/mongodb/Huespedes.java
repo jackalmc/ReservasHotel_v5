@@ -9,7 +9,6 @@ import org.iesalandalus.programacion.reservashotel.modelo.negocio.IHuespedes;
 import org.iesalandalus.programacion.reservashotel.modelo.negocio.mongodb.utilidades.MongoDB;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class Huespedes implements IHuespedes {
@@ -17,7 +16,7 @@ public class Huespedes implements IHuespedes {
     private List<Huesped> coleccionHuespedes;
 
     public Huespedes(){
-
+        comenzar();
     }
     @Override
     public List<Huesped> get(){

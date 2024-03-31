@@ -22,7 +22,7 @@ public class Reservas implements IReservas {
     private List<Reserva> coleccionReservas;
 
     public Reservas(){
-
+        comenzar();
     }
     @Override
     public List<Reserva> get(){

@@ -16,7 +16,7 @@ public class Habitaciones implements IHabitaciones {
     private List<Habitacion> coleccionHabitaciones;
 
     public Habitaciones(){
-
+        comenzar();
     }
     @Override
     public List<Habitacion> get(){
