@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Huespedes implements IHuespedes {
     private final String COLECCION="huespedes";
-    private List<Huesped> coleccionHuespedes;
+    private List<Huesped> coleccionHuespedes; //aunque pongo colección, realmente no lo uso mucho, a favor de tirar más de métodos específicos de MongoDB.
 
     public Huespedes(){
         comenzar();
@@ -48,18 +48,23 @@ public class Huespedes implements IHuespedes {
     public void insertar(Huesped huesped){
         if (huesped == null)
             throw new NullPointerException("No se puede introducir un huésped nulo");
+
         if (buscar(huesped) != null)
             throw new IllegalArgumentException("Ya existe ese huésped en la BD");
 
-        Document documentoAIntroducir = MongoDB.getDocumento(huesped);
-        MongoDB.getBD().getCollection(COLECCION).insertOne(documentoAIntroducir);
+        MongoDB.getBD().getCollection(COLECCION).insertOne(MongoDB.getDocumento(huesped));
     }
     @Override
     public Huesped buscar(Huesped huesped){
         if (huesped == null)
             throw new NullPointerException("No se puede buscar un huésped nulo");
 
-        return MongoDB.getHuesped(MongoDB.getBD().getCollection(COLECCION).find(Filters.eq(MongoDB.DNI, huesped.getDni())).first());
+        Document encontrado = MongoDB.getBD().getCollection(COLECCION).find(Filters.eq(MongoDB.DNI, huesped.getDni())).first();
+
+        if (encontrado==null)
+            return null;
+
+        else return MongoDB.getHuesped(encontrado);
     }
     @Override
     public void borrar(Huesped huesped){
@@ -68,7 +73,7 @@ public class Huespedes implements IHuespedes {
         if (buscar(huesped) == null)
             throw new IllegalArgumentException("No existe ese huésped en la BD");
 
-        MongoDB.getBD().getCollection(COLECCION).deleteOne(MongoDB.getDocumento(huesped));
+        MongoDB.getBD().getCollection(COLECCION).deleteOne(Filters.eq(MongoDB.DNI, huesped.getDni()));
     }
     @Override
     public void comenzar(){

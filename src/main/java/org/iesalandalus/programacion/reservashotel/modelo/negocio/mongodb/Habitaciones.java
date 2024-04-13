@@ -67,14 +67,19 @@ public class Habitaciones implements IHabitaciones {
             throw new IllegalArgumentException("Ya existe esa habitación en la BD");
 
         Document documentoAIntroducir = MongoDB.getDocumento(habitacion);
-        MongoDB.getBD().getCollection(COLECCION).insertOne(documentoAIntroducir);
+        MongoDB.getBD().getCollection(COLECCION).insertOne(documentoAIntroducir); //funciona bien aunque diga que no.
     }
     @Override
     public Habitacion buscar(Habitacion habitacion){
         if (habitacion == null)
             throw new NullPointerException("No se puede buscar una habitación nula");
 
-        return MongoDB.getHabitacion(MongoDB.getBD().getCollection(COLECCION).find(Filters.eq(MongoDB.IDENTIFICADOR,habitacion.getIdentificador())).first());
+        Document encontrado = MongoDB.getBD().getCollection(COLECCION).find(Filters.eq(MongoDB.IDENTIFICADOR,habitacion.getIdentificador())).first();
+
+        if (encontrado==null)
+            return null;
+        else return MongoDB.getHabitacion(encontrado);
+
     }
     @Override
     public void borrar(Habitacion habitacion){
@@ -83,7 +88,7 @@ public class Habitaciones implements IHabitaciones {
         if (buscar(habitacion) == null)
             throw new IllegalArgumentException("No existe ese huésped en la BD");
 
-        MongoDB.getBD().getCollection(COLECCION).deleteOne(MongoDB.getDocumento(habitacion));
+        MongoDB.getBD().getCollection(COLECCION).deleteOne(Filters.eq(MongoDB.IDENTIFICADOR,habitacion.getIdentificador()));
 
     }
     @Override

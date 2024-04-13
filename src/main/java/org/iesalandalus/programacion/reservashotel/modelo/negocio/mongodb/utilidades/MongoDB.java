@@ -4,7 +4,6 @@ import com.mongodb.*;
 import com.mongodb.client.*;
 import com.mongodb.client.MongoDatabase;
 
-import org.bson.types.ObjectId;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.*;
 import org.bson.Document;
 import java.time.LocalDate;
@@ -14,8 +13,8 @@ import java.time.format.DateTimeFormatter;
 
 public class MongoDB {
 
-    public static final DateTimeFormatter FORMATO_DIA = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    public static final DateTimeFormatter FORMATO_DIA_HORA = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    public static final DateTimeFormatter FORMATO_DIA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static final DateTimeFormatter FORMATO_DIA_HORA = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     private static final String SERVIDOR = "kd0h77u.mongodb.net";
     private static final int PUERTO = 27017;
@@ -88,15 +87,21 @@ public class MongoDB {
     }
 
     public static Document getDocumento(Huesped huesped){
-        return new Document("_id", new ObjectId())
+        if (huesped == null)
+            throw new NullPointerException("No se puede hacer un documento de un nulo (huesped)");
+
+        return new Document()
                 .append(NOMBRE, huesped.getNombre())
                 .append(DNI, huesped.getDni())
                 .append(TELEFONO, huesped.getTelefono())
                 .append(CORREO, huesped.getCorreo())
-                .append(FECHA_NACIMIENTO, huesped.getFechaNacimiento());
+                .append(FECHA_NACIMIENTO, huesped.getFechaNacimiento().format(FORMATO_DIA));
     }
 
     public static Huesped getHuesped(Document documentoHuesped){
+        if (documentoHuesped == null)
+            throw new NullPointerException("No se puede conseguir un huesped, de un documento nulo.");
+
         return new Huesped(
                 documentoHuesped.getString(NOMBRE),
                 documentoHuesped.getString(DNI),
@@ -107,8 +112,11 @@ public class MongoDB {
     }
 
     public static Document getDocumento(Habitacion habitacion){
+        if (habitacion == null)
+            throw new NullPointerException("No se puede hacer un documento de un nulo (habitacion)");
+
         if (habitacion instanceof Simple){
-            return new Document("_id",new ObjectId())
+            return new Document()
                     .append(IDENTIFICADOR, habitacion.getIdentificador())
                     .append(TIPO, TIPO_SIMPLE)
                     .append(PRECIO, habitacion.getPrecio())
@@ -116,7 +124,7 @@ public class MongoDB {
                     .append(PLANTA, habitacion.getPlanta())
                     .append(PUERTA, habitacion.getPuerta());
         }else if (habitacion instanceof Doble){
-            return new Document("_id",new ObjectId())
+            return new Document()
                     .append(IDENTIFICADOR, habitacion.getIdentificador())
                     .append(TIPO, TIPO_DOBLE)
                     .append(PRECIO, habitacion.getPrecio())
@@ -126,22 +134,26 @@ public class MongoDB {
                     .append(CAMAS_INDIVIDUALES, ((Doble) habitacion).getNumCamasIndividuales())
                     .append(CAMAS_DOBLES, ((Doble) habitacion).getNumCamasDobles());
         }else if (habitacion instanceof Triple){
-            return new Document("_id",new ObjectId())
+            return new Document()
                     .append(IDENTIFICADOR, habitacion.getIdentificador())
                     .append(TIPO, TIPO_TRIPLE)
                     .append(PRECIO, habitacion.getPrecio())
                     .append(NUMERO_PERSONAS, habitacion.getNumeroMaximoPersonas())
                     .append(PLANTA, habitacion.getPlanta())
                     .append(PUERTA, habitacion.getPuerta())
-                    .append(BANOS, ((Triple) habitacion).getNumBanos());
+                    .append(BANOS, ((Triple) habitacion).getNumBanos())
+                    .append(CAMAS_INDIVIDUALES, ((Triple) habitacion).getNumCamasIndividuales())
+                    .append(CAMAS_DOBLES, ((Triple) habitacion).getNumCamasDobles());
+
         }else if(habitacion instanceof Suite){
-            return new Document("_id",new ObjectId())
+            return new Document()
                     .append(IDENTIFICADOR, habitacion.getIdentificador())
                     .append(TIPO, TIPO_SUITE)
                     .append(PRECIO, habitacion.getPrecio())
                     .append(NUMERO_PERSONAS, habitacion.getNumeroMaximoPersonas())
                     .append(PLANTA, habitacion.getPlanta())
                     .append(PUERTA, habitacion.getPuerta())
+                    .append(BANOS, ((Suite) habitacion).getNumBanos())
                     .append(JACUZZI, ((Suite) habitacion).isTieneJacuzzi());
         }else return null;
     }
@@ -182,28 +194,35 @@ public class MongoDB {
     }
 
     public static Document getDocumento(Reserva reserva){
+        if (reserva == null)
+            throw new NullPointerException("No se puede hacer un documento de un nulo (reserva)");
 
-        return new Document("_id", new ObjectId())
+        return new Document()
                 .append(HUESPED, getDocumento(reserva.getHuesped()))
                 .append(HABITACION, getDocumento(reserva.getHabitacion()))
-                .append(REGIMEN, reserva.getRegimen())
-                .append(FECHA_INICIO_RESERVA, reserva.getFechaInicioReserva())
-                .append(FECHA_FIN_RESERVA, reserva.getFechaFinReserva())
+                .append(REGIMEN, reserva.getRegimen().name())
+                .append(FECHA_INICIO_RESERVA, reserva.getFechaInicioReserva().format(FORMATO_DIA))
+                .append(FECHA_FIN_RESERVA, reserva.getFechaFinReserva().format(FORMATO_DIA))
                 .append(NUMERO_PERSONAS, reserva.getNumeroPersonas());
 
     }
 
     public static Reserva getReserva(Document documentoReserva){
+        if (documentoReserva == null)
+            throw new NullPointerException("No se puede sacar una reserva de un documento nulo");
+
         Reserva reservaADevolver = new Reserva(
                 getHuesped((Document)documentoReserva.get(HUESPED)),
                 getHabitacion((Document)documentoReserva.get(HABITACION)),
                 Regimen.valueOf(documentoReserva.getString(REGIMEN)),
-                LocalDate.parse(documentoReserva.getString(FECHA_INICIO_RESERVA)),
-                LocalDate.parse(documentoReserva.getString(FECHA_FIN_RESERVA)),
+                LocalDate.parse(documentoReserva.getString(FECHA_INICIO_RESERVA), FORMATO_DIA),
+                LocalDate.parse(documentoReserva.getString(FECHA_FIN_RESERVA), FORMATO_DIA),
                 documentoReserva.getInteger(NUMERO_PERSONAS));
 
-        reservaADevolver.setCheckIn(LocalDateTime.parse(documentoReserva.getString(CHECKIN), FORMATO_DIA_HORA));
-        reservaADevolver.setCheckOut(LocalDateTime.parse(documentoReserva.getString(CHECKOUT), FORMATO_DIA_HORA));
+        if (documentoReserva.getString(CHECKIN) != null)
+            reservaADevolver.setCheckIn(LocalDateTime.parse(documentoReserva.getString(CHECKIN), FORMATO_DIA_HORA));
+        if (documentoReserva.getString(CHECKOUT) != null)
+            reservaADevolver.setCheckOut(LocalDateTime.parse(documentoReserva.getString(CHECKOUT), FORMATO_DIA_HORA));
 
 
         return reservaADevolver;

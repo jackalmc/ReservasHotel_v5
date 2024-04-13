@@ -187,6 +187,6 @@ public class Huesped {
 
     @Override
     public String toString() {
-        return "nombre="+nombre+ " ("+ getIniciales() +"), DNI="+dni+", correo="+correo+", teléfono="+telefono+", fecha nacimiento="+fechaNacimiento.format(DateTimeFormatter.ofPattern(FORMATO_FECHA));
+        return "nombre="+nombre+ " ("+ getIniciales() +"), DNI="+dni+", correo="+correo+", telefono="+telefono+", fecha nacimiento="+fechaNacimiento.format(DateTimeFormatter.ofPattern(FORMATO_FECHA));
     }
 }

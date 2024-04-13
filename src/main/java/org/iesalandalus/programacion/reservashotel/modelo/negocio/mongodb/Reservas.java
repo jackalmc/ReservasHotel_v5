@@ -12,14 +12,13 @@ import org.iesalandalus.programacion.reservashotel.modelo.negocio.mongodb.utilid
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static com.mongodb.client.model.Filters.eq;
 
 public class Reservas implements IReservas {
     private final String COLECCION="reservas";
-    private List<Reserva> coleccionReservas;
+    private List<Reserva> coleccionReservas; //aunque pongo colección, realmente no lo uso mucho, a favor de tirar más de métodos específicos de MongoDB.
 
     public Reservas(){
         comenzar();
@@ -43,10 +42,11 @@ public class Reservas implements IReservas {
         List<Reserva> copiaOrdenada = new ArrayList<>();
         FindIterable<Document> documents = MongoDB.getBD().getCollection(COLECCION).find().sort(Sorts.descending(MongoDB.FECHA_INICIO_RESERVA));
 
-        for (Document document:documents)
-            if (document.getString(MongoDB.HUESPED_DNI).equals(huesped.getDni()))
+        for (Document document:documents) {
+            Document huespedecillo = (Document) document.get(MongoDB.HUESPED); //por alguna razón no me deja acceder usando directamente MongoDB.HUESPED_DNI como llave
+            if (huespedecillo.getString(MongoDB.DNI).equals(huesped.getDni()))
                 copiaOrdenada.add(MongoDB.getReserva(document));
-
+        }
         return copiaOrdenada;
     }
     @Override
@@ -57,25 +57,27 @@ public class Reservas implements IReservas {
         List<Reserva> copiaOrdenada = new ArrayList<>();
         FindIterable<Document> documents = MongoDB.getBD().getCollection(COLECCION).find().sort(Sorts.descending(MongoDB.FECHA_INICIO_RESERVA));
 
-        for (Document document:documents)
+        for (Document document:documents){
+            Document habitancioncilla = (Document) document.get(MongoDB.HABITACION);
             switch (tipoHabitacion) {
                 case SIMPLE:
-                    if (document.getString(MongoDB.HABITACION_TIPO).equals(MongoDB.TIPO_SIMPLE))
+                    if (habitancioncilla.getString(MongoDB.TIPO).equals(MongoDB.TIPO_SIMPLE))
                         copiaOrdenada.add(MongoDB.getReserva(document));
                     break;
                 case DOBLE:
-                    if (document.getString(MongoDB.HABITACION_TIPO).equals(MongoDB.TIPO_DOBLE))
+                    if (habitancioncilla.getString(MongoDB.TIPO).equals(MongoDB.TIPO_DOBLE))
                         copiaOrdenada.add(MongoDB.getReserva(document));
                     break;
                 case TRIPLE:
-                    if (document.getString(MongoDB.HABITACION_TIPO).equals(MongoDB.TIPO_TRIPLE))
+                    if (habitancioncilla.getString(MongoDB.TIPO).equals(MongoDB.TIPO_TRIPLE))
                         copiaOrdenada.add(MongoDB.getReserva(document));
                     break;
                 case SUITE:
-                    if (document.getString(MongoDB.HABITACION_TIPO).equals(MongoDB.TIPO_SUITE))
+                    if (habitancioncilla.getString(MongoDB.TIPO).equals(MongoDB.TIPO_SUITE))
                         copiaOrdenada.add(MongoDB.getReserva(document));
                     break;
             }
+        }
 
         return copiaOrdenada;
     }
@@ -125,14 +127,20 @@ public class Reservas implements IReservas {
     }
     @Override
     public Reserva buscar(Reserva reserva){
+
         if (reserva == null)
             throw new NullPointerException("No se puede buscar una reserva nula");
 
-        return MongoDB.getReserva(MongoDB.getBD().getCollection(COLECCION).find(
+        Document encontrado = MongoDB.getBD().getCollection(COLECCION).find(
                 Filters.and(
-                        eq(MongoDB.HABITACION_IDENTIFICADOR, reserva.getHabitacion().getIdentificador()),
-                        eq(MongoDB.FECHA_INICIO_RESERVA, reserva.getFechaInicioReserva())
-                )).first());
+                        Filters.eq(MongoDB.HABITACION_IDENTIFICADOR, reserva.getHabitacion().getIdentificador()),
+                        Filters.eq(MongoDB.FECHA_INICIO_RESERVA, reserva.getFechaInicioReserva().format(MongoDB.FORMATO_DIA))
+                )).first();
+
+        if (encontrado==null)
+            return null;
+        else return MongoDB.getReserva(encontrado);
+
     }
     @Override
     public void borrar(Reserva reserva){
@@ -141,7 +149,11 @@ public class Reservas implements IReservas {
         if (buscar(reserva) == null)
             throw new IllegalArgumentException("No existe esa reserva en la BD");
 
-        MongoDB.getBD().getCollection(COLECCION).deleteOne(MongoDB.getDocumento(reserva));
+        MongoDB.getBD().getCollection(COLECCION).deleteOne(
+                Filters.and(
+                        eq(MongoDB.HABITACION_IDENTIFICADOR, reserva.getHabitacion().getIdentificador()),
+                        eq(MongoDB.FECHA_INICIO_RESERVA, reserva.getFechaInicioReserva().format(MongoDB.FORMATO_DIA))
+                ));
     }
     @Override
     public void comenzar(){
@@ -169,8 +181,8 @@ public class Reservas implements IReservas {
         MongoDB.getBD().getCollection(COLECCION).updateOne(
                 Filters.and(
                         eq(MongoDB.HABITACION_IDENTIFICADOR, reserva.getHabitacion().getIdentificador()),
-                        eq(MongoDB.FECHA_INICIO_RESERVA, reserva.getFechaInicioReserva())
-                ), Updates.set(MongoDB.CHECKIN, fecha));
+                        eq(MongoDB.FECHA_INICIO_RESERVA, reserva.getFechaInicioReserva().format(MongoDB.FORMATO_DIA))
+                ), Updates.set(MongoDB.CHECKIN, fecha.format(MongoDB.FORMATO_DIA_HORA)));
 
     }
 
@@ -190,7 +202,7 @@ public class Reservas implements IReservas {
         MongoDB.getBD().getCollection(COLECCION).updateOne(
                 Filters.and(
                         eq(MongoDB.HABITACION_IDENTIFICADOR, reserva.getHabitacion().getIdentificador()),
-                        eq(MongoDB.FECHA_INICIO_RESERVA, reserva.getFechaInicioReserva())
-                ), Updates.set(MongoDB.CHECKOUT, fecha));
+                        eq(MongoDB.FECHA_INICIO_RESERVA, reserva.getFechaInicioReserva().format(MongoDB.FORMATO_DIA))
+                ), Updates.set(MongoDB.CHECKOUT, fecha.format(MongoDB.FORMATO_DIA_HORA)));
     }
 }
