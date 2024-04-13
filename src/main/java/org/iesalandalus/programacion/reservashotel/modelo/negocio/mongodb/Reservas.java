@@ -145,6 +145,7 @@ public class Reservas implements IReservas {
     }
     @Override
     public void comenzar(){
+        coleccionReservas = new ArrayList<>();
         FindIterable<Document> documents = MongoDB.getBD().getCollection(COLECCION).find();
 
         for (Document document : documents)

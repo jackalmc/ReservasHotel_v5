@@ -29,7 +29,7 @@ public class MainApp {
             }
             if (args[0].equalsIgnoreCase("-fdmemoria"))
                 modeloADevoler = new Modelo(FactoriaFuenteDatos.MEMORIA);
-            if (args[0].equalsIgnoreCase("-fdmongodb")) {
+            else if (args[0].equalsIgnoreCase("-fdmongodb")) {
                 MongoDB.establecerConexion(); //Esto hace que lo tenga que poner público. Mantiene la conexión abierta con la app.
                 modeloADevoler = new Modelo(FactoriaFuenteDatos.MONGODB);
             }

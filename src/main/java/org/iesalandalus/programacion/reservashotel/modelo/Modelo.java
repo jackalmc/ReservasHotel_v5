@@ -65,7 +65,6 @@ public class Modelo implements IModelo{
     }
 
     public List<Huesped> getHuespedes(){
-        //get() llama a copiaprofunda y ya devuelve nuevas instancias
         return huespedes.get();
     }
 

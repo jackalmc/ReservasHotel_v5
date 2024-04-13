@@ -48,7 +48,7 @@ public class Huespedes implements IHuespedes {
     public void insertar(Huesped huesped){
         if (huesped == null)
             throw new NullPointerException("No se puede introducir un huésped nulo");
-        if (MongoDB.getBD().getCollection(COLECCION).find(Filters.eq(MongoDB.DNI, huesped.getDni())).first() != null)
+        if (buscar(huesped) != null)
             throw new IllegalArgumentException("Ya existe ese huésped en la BD");
 
         Document documentoAIntroducir = MongoDB.getDocumento(huesped);
@@ -65,13 +65,14 @@ public class Huespedes implements IHuespedes {
     public void borrar(Huesped huesped){
         if (huesped == null)
             throw new NullPointerException("No se puede borrar un huésped nulo");
-        if (MongoDB.getBD().getCollection(COLECCION).find(Filters.eq(MongoDB.DNI, huesped.getDni())).first() == null)
+        if (buscar(huesped) == null)
             throw new IllegalArgumentException("No existe ese huésped en la BD");
 
         MongoDB.getBD().getCollection(COLECCION).deleteOne(MongoDB.getDocumento(huesped));
     }
     @Override
     public void comenzar(){
+        coleccionHuespedes=new ArrayList<>();
         FindIterable<Document> documents = MongoDB.getBD().getCollection(COLECCION).find();
 
         for (Document document : documents)

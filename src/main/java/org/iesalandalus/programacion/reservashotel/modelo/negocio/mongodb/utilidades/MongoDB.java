@@ -8,6 +8,7 @@ import org.bson.types.ObjectId;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.*;
 import org.bson.Document;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
@@ -16,7 +17,7 @@ public class MongoDB {
     public static final DateTimeFormatter FORMATO_DIA = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static final DateTimeFormatter FORMATO_DIA_HORA = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
-    private static final String SERVIDOR = "reservashotel.kd0h77u.mongodb.net";
+    private static final String SERVIDOR = "kd0h77u.mongodb.net";
     private static final int PUERTO = 27017;
     private static final String BD = "reservashotel";
     private static final String USUARIO = "reservashotel";
@@ -66,7 +67,7 @@ public class MongoDB {
     }
 
     public static void establecerConexion(){
-        String connectionString = "mongodb://"+USUARIO+":"+CONTRASENA+"@"+BD+"."+SERVIDOR+":"+PUERTO;
+        String connectionString = "mongodb+srv://"+ USUARIO+ ":" + CONTRASENA + "@"+ BD +"." + SERVIDOR +"/?retryWrites=true&w=majority";
         ServerApi serverApi = ServerApi.builder()
                 .version(ServerApiVersion.V1)
                 .build();
@@ -76,6 +77,9 @@ public class MongoDB {
                 .build();
         // Create a new client and connect to the server
        conexion = MongoClients.create(settings);
+
+       if (conexion != null)
+           System.out.println("Conexión establecida!");
 
     }
 
@@ -190,14 +194,19 @@ public class MongoDB {
     }
 
     public static Reserva getReserva(Document documentoReserva){
-        return new Reserva(
-                (Huesped) documentoReserva.get(HUESPED),
-                (Habitacion) documentoReserva.get(HABITACION),
+        Reserva reservaADevolver = new Reserva(
+                getHuesped((Document)documentoReserva.get(HUESPED)),
+                getHabitacion((Document)documentoReserva.get(HABITACION)),
                 Regimen.valueOf(documentoReserva.getString(REGIMEN)),
                 LocalDate.parse(documentoReserva.getString(FECHA_INICIO_RESERVA)),
                 LocalDate.parse(documentoReserva.getString(FECHA_FIN_RESERVA)),
-                documentoReserva.getInteger(NUMERO_PERSONAS)
-        );
+                documentoReserva.getInteger(NUMERO_PERSONAS));
+
+        reservaADevolver.setCheckIn(LocalDateTime.parse(documentoReserva.getString(CHECKIN), FORMATO_DIA_HORA));
+        reservaADevolver.setCheckOut(LocalDateTime.parse(documentoReserva.getString(CHECKOUT), FORMATO_DIA_HORA));
+
+
+        return reservaADevolver;
     }
 
 }

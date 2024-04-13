@@ -63,7 +63,7 @@ public class Habitaciones implements IHabitaciones {
     public void insertar(Habitacion habitacion){
         if (habitacion == null)
             throw new NullPointerException("No se puede introducir una habitación nula");
-        if (MongoDB.getBD().getCollection(COLECCION).find(Filters.eq(MongoDB.IDENTIFICADOR, habitacion.getIdentificador())).first() != null)
+        if (buscar(habitacion) != null)
             throw new IllegalArgumentException("Ya existe esa habitación en la BD");
 
         Document documentoAIntroducir = MongoDB.getDocumento(habitacion);
@@ -80,13 +80,15 @@ public class Habitaciones implements IHabitaciones {
     public void borrar(Habitacion habitacion){
         if (habitacion == null)
             throw new NullPointerException("No se puede borrar un huésped nulo");
-        if (MongoDB.getBD().getCollection(COLECCION).find(Filters.eq(MongoDB.IDENTIFICADOR,habitacion.getIdentificador())).first() == null)
+        if (buscar(habitacion) == null)
             throw new IllegalArgumentException("No existe ese huésped en la BD");
 
         MongoDB.getBD().getCollection(COLECCION).deleteOne(MongoDB.getDocumento(habitacion));
+
     }
     @Override
     public void comenzar(){
+        coleccionHabitaciones = new ArrayList<>();
         FindIterable<Document> documents = MongoDB.getBD().getCollection(COLECCION).find();
 
         for (Document document : documents)
@@ -95,5 +97,6 @@ public class Habitaciones implements IHabitaciones {
     @Override
     public void terminar(){
         MongoDB.cerrarConexion();
+        coleccionHabitaciones=null;
     }
 }
