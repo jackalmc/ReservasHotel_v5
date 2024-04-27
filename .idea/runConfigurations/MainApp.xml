@@ -3,8 +3,8 @@
     <option name="ALTERNATIVE_JRE_PATH" value="17" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="MAIN_CLASS_NAME" value="org.iesalandalus.programacion.reservashotel.MainApp" />
-    <module name="ReservasHotel_v4.main" />
-    <option name="PROGRAM_PARAMETERS" value="-fdmongodb" />
+    <module name="ReservasHotel_v5.main" />
+    <option name="PROGRAM_PARAMETERS" value="-fdmongodb -vTexto" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="org.iesalandalus.programacion.reservashotel.*" />
