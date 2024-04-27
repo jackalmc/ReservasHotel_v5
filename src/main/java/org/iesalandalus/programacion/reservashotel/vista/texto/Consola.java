@@ -1,9 +1,8 @@
-package org.iesalandalus.programacion.reservashotel.vista;
+package org.iesalandalus.programacion.reservashotel.vista.texto;
 
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.*;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
-import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

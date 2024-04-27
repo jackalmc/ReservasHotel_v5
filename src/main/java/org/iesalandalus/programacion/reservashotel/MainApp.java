@@ -3,16 +3,15 @@ package org.iesalandalus.programacion.reservashotel;
 
 import org.iesalandalus.programacion.reservashotel.controlador.Controlador;
 import org.iesalandalus.programacion.reservashotel.modelo.FactoriaFuenteDatos;
-import org.iesalandalus.programacion.reservashotel.modelo.IModelo;
 import org.iesalandalus.programacion.reservashotel.modelo.Modelo;
 import org.iesalandalus.programacion.reservashotel.modelo.negocio.mongodb.utilidades.MongoDB;
-import org.iesalandalus.programacion.reservashotel.vista.Vista;
+import org.iesalandalus.programacion.reservashotel.vista.texto.VistaTexto;
 
 
 public class MainApp {
     public static void main(String[] args) {
 
-        Vista vista = new Vista();
+        VistaTexto vista = new VistaTexto();
         Modelo modelo = procesarArgumentosFuenteDatos(args);
         Controlador controlador = new Controlador(vista, modelo);
         controlador.comenzar();
