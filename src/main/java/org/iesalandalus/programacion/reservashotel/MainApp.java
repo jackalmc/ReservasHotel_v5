@@ -22,7 +22,7 @@ public class MainApp {
     public static Modelo procesarArgumentosFuenteDatos(String[] args){
         Modelo modeloADevoler=null;
         try {
-            if (args[0].isBlank()) {
+            if (args.length<=1 || args[0].isBlank()) {
                 System.out.println("\n*********************************************");
                 System.out.println("*** Necesito argumentos para funcionar!!! ***");
                 System.out.println("*********************************************\n");
@@ -48,7 +48,7 @@ public class MainApp {
     public static Vista procesarArgumentosVista(String[] args){
         Vista vistaADevolver=null;
         try {
-            if (args[1].isBlank()) {
+            if ( args.length<=1 || args[1].isBlank()) {
                 System.out.println("\n*********************************************");
                 System.out.println("*** Necesito argumentos para funcionar!!! ***");
                 System.out.println("*********************************************\n");

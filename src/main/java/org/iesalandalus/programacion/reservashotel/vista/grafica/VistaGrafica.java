@@ -7,7 +7,7 @@ public class VistaGrafica extends Vista {
     private VistaGrafica instancia;
 
     public VistaGrafica(){
-        comenzar();
+
     }
 
     public VistaGrafica getInstancia() {
@@ -19,7 +19,7 @@ public class VistaGrafica extends Vista {
 
     @Override
     public void comenzar() {
-        getInstancia();
+        LanzadorVentanaPrincipal.comenzar();
     }
 
     @Override
