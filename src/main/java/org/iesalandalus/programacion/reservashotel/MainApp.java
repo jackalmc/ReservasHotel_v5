@@ -31,10 +31,10 @@ public class MainApp {
             if (args[0].equalsIgnoreCase("-fdmemoria") || args[1].equalsIgnoreCase("-fdmemoria"))
                 modeloADevoler = new Modelo(FactoriaFuenteDatos.MEMORIA);
             else if (args[0].equalsIgnoreCase("-fdmongodb") || args[1].equalsIgnoreCase("-fdmongodb")) {
-                MongoDB.establecerConexion(); //Esto hace que lo tenga que poner público. Mantiene la conexión abierta con la app.
+                MongoDB.establecerConexion(); //Esto hace que lo tenga que poner publico. Mantiene la conexion abierta con la app.
                 modeloADevoler = new Modelo(FactoriaFuenteDatos.MONGODB);
             }
-                //todo crear menu en caso de argumentos no válidos??.
+                //todo crear menu en caso de argumentos no validos??.
 
             return modeloADevoler;
 
@@ -57,10 +57,10 @@ public class MainApp {
             if (args[1].equalsIgnoreCase("-vTexto") || args[0].equalsIgnoreCase("-vTexto"))
                 vistaADevolver = FactoriaVista.TEXTO.crear();
             else if (args[1].equalsIgnoreCase("-vGrafica") || args[0].equalsIgnoreCase("-vGrafica")) {
-                MongoDB.establecerConexion(); //Esto hace que lo tenga que poner público. Mantiene la conexión abierta con la app.
+                MongoDB.establecerConexion(); //Esto hace que lo tenga que poner publico. Mantiene la conexion abierta con la app.
                 vistaADevolver = FactoriaVista.GRAFICA.crear();
             }
-            //todo crear menu en caso de argumentos no válidos??.
+            //todo crear menu en caso de argumentos no validos??.
 
             return vistaADevolver;
 

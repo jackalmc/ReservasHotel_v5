@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="287.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.reservashotel.vista.grafica.controladores.ControladorSobre">
+   <children>
+      <ImageView fitHeight="282.0" fitWidth="282.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes/logo-ies2.png" />
+         </image>
+         <VBox.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </VBox.margin>
+      </ImageView>
+      <Label alignment="CENTER" prefHeight="36.0" prefWidth="287.0" text="Alumno: Juan José Almagro Cabrera" textAlignment="CENTER">
+         <font>
+            <Font name="Yu Gothic Bold" size="15.0" />
+         </font>
+      </Label>
+   </children>
+</VBox>

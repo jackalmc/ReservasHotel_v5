@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.iesalandalus.programacion.reservashotel.vista.grafica.recursos.LocalizadorRecursos;
@@ -15,7 +16,11 @@ import java.io.IOException;
 
 public class ControladorVentanaPrincipal {
 
-    @FXML private Button btnAbrirVentanaInsertar;
+    @FXML    private Button btnAbrirVentanaInsertar;
+    @FXML    private MenuItem menuBorrar;
+    @FXML    private MenuItem menuBuscar;
+    @FXML    private MenuItem menuInsertar;
+    @FXML    private MenuItem menuSalir;
 
     @FXML
     void actAbrirVentanaInsertar(ActionEvent event) {
@@ -38,7 +43,7 @@ public class ControladorVentanaPrincipal {
 
     @FXML
     void salir(ActionEvent event) {
-        if (Dialogos.mostrarDialogoConfirmacion("DemoDAW", "Estas seguro que quieres salir de la aplicacion"))
+        if (Dialogos.mostrarDialogoConfirmacion("Salir de la Aplicacion", "Estas seguro que quieres salir"))
         {
             System.exit(0);
         }
