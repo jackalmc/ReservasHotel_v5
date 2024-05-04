@@ -3,15 +3,24 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.reservashotel.vista.grafica.controladores.ControladorVentanaPrincipal">
@@ -27,30 +36,27 @@
                <items>
                 <Menu mnemonicParsing="false" text="Huespedes">
                   <items>
-                        <MenuItem fx:id="menuInsertar" mnemonicParsing="false" onAction="#actAbrirVentanaInsertar" text="Insertar" />
-                        <MenuItem fx:id="menuBuscar" mnemonicParsing="false" onAction="#actAbrirVentanaInsertar" text="Buscar" />
-                    <MenuItem fx:id="menuBorrar" mnemonicParsing="false" onAction="#actAbrirVentanaInsertar" text="Borrar" />
+                        <MenuItem fx:id="menuInsertarHu" mnemonicParsing="false" onAction="#actAbrirInsertar" text="Insertar" />
+                    <MenuItem fx:id="menuBorrarHu" mnemonicParsing="false" onAction="#actAbrirBorrar" text="Borrar" />
                   </items>
                 </Menu>
                   <Menu mnemonicParsing="false" text="Habitaciones">
                      <items>
-                        <MenuItem fx:id="menuInsertar" mnemonicParsing="false" onAction="#actAbrirVentanaInsertar" text="Insertar" />
-                        <MenuItem fx:id="menuBuscar" mnemonicParsing="false" onAction="#actAbrirVentanaInsertar" text="Buscar" />
-                        <MenuItem fx:id="menuBorrar" mnemonicParsing="false" onAction="#actAbrirVentanaInsertar" text="Borrar" />
+                        <MenuItem fx:id="menuInsertarHab" mnemonicParsing="false" onAction="#actAbrirInsertar" text="Insertar" />
+                        <MenuItem fx:id="menuBorrarHab" mnemonicParsing="false" onAction="#actAbrirBorrar" text="Borrar" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Reservas">
                      <items>
-                        <MenuItem fx:id="menuInsertar" mnemonicParsing="false" onAction="#actAbrirVentanaInsertar" text="Insertar" />
-                        <MenuItem fx:id="menuBuscar" mnemonicParsing="false" onAction="#actAbrirVentanaInsertar" text="Buscar" />
-                        <MenuItem fx:id="menuBorrar" mnemonicParsing="false" onAction="#actAbrirVentanaInsertar" text="Borrar" />
+                        <MenuItem fx:id="menuInsertarRes" mnemonicParsing="false" onAction="#actAbrirInsertar" text="Insertar" />
+                        <MenuItem fx:id="menuBorrarRes" mnemonicParsing="false" onAction="#actAbrirBorrar" text="Borrar" />
                      </items>
                   </Menu>
                </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Ayuda">
             <items>
-              <MenuItem mnemonicParsing="false" text="Sobre..." />
+              <MenuItem fx:id="menuSobre" mnemonicParsing="false" onAction="#actSobre" text="Sobre..." />
             </items>
           </Menu>
         </menus>
@@ -61,7 +67,41 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="548.0" prefWidth="1005.0">
                      <children>
-                        <Button fx:id="btnAbrirVentanaInsertar" layoutX="268.0" layoutY="160.0" mnemonicParsing="false" onAction="#actAbrirVentanaInsertar" text="Insertar" />
+                        <GridPane layoutX="6.0" layoutY="1.0" prefHeight="689.0" prefWidth="957.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="314.0" minWidth="0.0" prefWidth="68.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="760.0" minWidth="10.0" prefWidth="731.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="121.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="460.0" minHeight="0.0" prefHeight="314.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="460.0" minHeight="0.0" prefHeight="146.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <ImageView fitHeight="383.0" fitWidth="853.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../imagenes/hotel%20(2).png" />
+                                       </image>
+                                       <VBox.margin>
+                                          <Insets top="40.0" />
+                                       </VBox.margin>
+                                    </ImageView>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <children>
+                                    <Button fx:id="btnSimpleInsertar" mnemonicParsing="false" onAction="#actAbrirInsertar" text="Insertar registros" />
+                                    <Button fx:id="btnSimpleBorrar" mnemonicParsing="false" onAction="#actAbrirBorrar" text="Borrar registros" />
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets top="40.0" />
+                                 </GridPane.margin>
+                              </VBox>
+                           </children>
+                        </GridPane>
                      </children></AnchorPane>
             </content>
                <graphic>
@@ -78,20 +118,206 @@
                   </ImageView>
                </graphic>
           </Tab>
-          <Tab text="Huespedes">
+          <Tab>
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="695.0" prefWidth="958.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="695.0" prefWidth="958.0">
+                     <children>
+                        <VBox prefHeight="689.0" prefWidth="956.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Buscar: " />
+                                    <TextField fx:id="tfHuFiltrado" prefHeight="25.0" prefWidth="184.0">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <TextField fx:id="tfHuBuscar" prefHeight="25.0" prefWidth="182.0">
+                                       <HBox.margin>
+                                          <Insets left="200.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Button fx:id="btnHuBuscar" mnemonicParsing="false" onAction="#actBuscar" text="Button">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <VBox prefHeight="689.0" prefWidth="956.0">
+                                 <children>
+                                    <TableView fx:id="tvHuespedes" prefHeight="611.0" prefWidth="916.0">
+                                      <columns>
+                                        <TableColumn fx:id="tcHuDni" prefWidth="114.0" text="DNI" />
+                                        <TableColumn fx:id="tcHuNombre" prefWidth="298.0" text="Nombre" />
+                                          <TableColumn fx:id="tcHuCorreo" minWidth="0.0" prefWidth="264.0" text="Correo" />
+                                          <TableColumn fx:id="tcHuTlf" prefWidth="105.0" text="Telefono" />
+                                          <TableColumn fx:id="tcHuFechaIni" prefWidth="134.0" text="Fecha de Nacimiento" />
+                                      </columns>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </VBox.margin>
+                                       <contextMenu>
+                                          <ContextMenu>
+                                            <items>
+                                              <MenuItem fx:id="menuHuInsertar" mnemonicParsing="false" onAction="#cmInsertarHuesped" text="Insertar" />
+                                                <MenuItem fx:id="menuHuBorrar" mnemonicParsing="false" onAction="#cmBorrarHuesped" text="Borrar" />
+                                            </items>
+                                          </ContextMenu>
+                                       </contextMenu>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
             </content>
+               <graphic>
+                  <ImageView fitHeight="62.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/huesped.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
           </Tab>
-            <Tab text="Habitaciones">
+            <Tab>
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="695.0" prefWidth="958.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="695.0" prefWidth="958.0">
+                     <children>
+                        <VBox prefHeight="689.0" prefWidth="956.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Buscar: " />
+                                    <TextField fx:id="tfHabFiltrado" prefHeight="25.0" prefWidth="184.0">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <TextField fx:id="tfHabBuscar" prefHeight="25.0" prefWidth="182.0">
+                                       <HBox.margin>
+                                          <Insets left="200.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Button fx:id="btnHabBuscar" mnemonicParsing="false" onAction="#actBuscarHabitaciones" text="Button">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <VBox prefHeight="689.0" prefWidth="956.0">
+                                 <children>
+                                    <TableView fx:id="tvHabitaciones" prefHeight="611.0" prefWidth="916.0">
+                                       <columns>
+                                          <TableColumn fx:id="tcHabId" prefWidth="109.0" text="Identificador" />
+                                          <TableColumn fx:id="tcHabTipo" prefWidth="164.0" text="Tipo" />
+                                          <TableColumn fx:id="tcHabPrecio" minWidth="0.0" prefWidth="140.0" text="Precio" />
+                                          <TableColumn fx:id="tcHabCamInd" prefWidth="161.0" text="Camas Individuales" />
+                                          <TableColumn fx:id="tcHabCamDob" prefWidth="142.0" text="Camas Dobles" />
+                                          <TableColumn fx:id="tcHabBanios" prefWidth="90.0" text="Banios" />
+                                          <TableColumn fx:id="tcHabJacuzzi" prefWidth="109.0" text="Jacuzzi" />
+                                       </columns>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </VBox.margin>
+                                       <contextMenu>
+                                          <ContextMenu>
+                                             <items>
+                                                <MenuItem fx:id="menuHabInsertar" mnemonicParsing="false" onAction="#cmInsertarHabitacion" text="Insertar" />
+                                                <MenuItem fx:id="menuHabBorrar" mnemonicParsing="false" onAction="#cmBorrarHabitacion" text="Borrar" />
+                                             </items>
+                                          </ContextMenu>
+                                       </contextMenu>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
                </content>
+               <graphic>
+                  <ImageView fitHeight="62.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/hotel.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Tab>
-            <Tab text="Reservas">
+            <Tab>
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="695.0" prefWidth="958.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="695.0" prefWidth="958.0">
+                     <children>
+                        <VBox layoutX="1.0" layoutY="-3.0" prefHeight="695.0" prefWidth="957.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="39.0" prefWidth="957.0">
+                                 <children>
+                                    <Label text="Buscar: " />
+                                    <TextField fx:id="tfResFiltrado" prefHeight="25.0" prefWidth="184.0">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <TextField fx:id="tfResBuscar" prefHeight="25.0" prefWidth="182.0">
+                                       <HBox.margin>
+                                          <Insets left="200.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Button fx:id="btnResBuscar" mnemonicParsing="false" onAction="#actBuscarReservas" text="Button">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <VBox prefHeight="629.0" prefWidth="990.0">
+                                 <children>
+                                    <TableView fx:id="tvReservas" prefHeight="611.0" prefWidth="916.0">
+                                       <columns>
+                                          <TableColumn fx:id="tcResDNI" prefWidth="90.0" text="DNI" />
+                                          <TableColumn fx:id="tcResNombre" prefWidth="143.0" text="Nombre" />
+                                          <TableColumn fx:id="tcResId" minWidth="0.0" prefWidth="79.0" text="Identificador" />
+                                          <TableColumn fx:id="tcResTipo" prefWidth="140.0" text="Tipo" />
+                                          <TableColumn fx:id="tcResRegimen" prefWidth="103.0" text="Regimen" />
+                                          <TableColumn fx:id="tcResFechaInic" prefWidth="104.0" text="Fecha Inicio" />
+                                          <TableColumn fx:id="tcResFechaFin" prefWidth="96.0" text="Fecha Fin" />
+                                          <TableColumn fx:id="tcCheckIn" prefWidth="85.0" text="Checkin" />
+                                          <TableColumn fx:id="tcCheckOut" prefWidth="74.0" text="Checkoout" />
+                                       </columns>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </VBox.margin>
+                                       <contextMenu>
+                                          <ContextMenu>
+                                             <items>
+                                                <MenuItem fx:id="menuInsertarReserva" mnemonicParsing="false" onAction="#cmInsertarReserva" text="Insertar" />
+                                                <MenuItem fx:id="menuBorrarReserva" mnemonicParsing="false" onAction="#cmBorrarReserva" text="Borrar" />
+                                             </items>
+                                          </ContextMenu>
+                                       </contextMenu>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
                </content>
+               <graphic>
+                  <ImageView fitHeight="62.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/reservado.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Tab>
         </tabs>
          <opaqueInsets>
