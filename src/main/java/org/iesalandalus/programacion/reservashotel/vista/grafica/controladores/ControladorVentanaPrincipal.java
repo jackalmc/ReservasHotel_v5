@@ -66,14 +66,15 @@ public class ControladorVentanaPrincipal {
     @FXML    private TextField tfHuFiltrado;
     @FXML    private TextField tfResBuscar;
     @FXML    private TextField tfResFiltrado;
+    // Huespedes
     @FXML    private TableView<Huesped> tvHuespedes;
     private FilteredList<Huesped> listaHuespedes;
     private ObservableList<Huesped> obsHuespedes;
-
+    //Habitaciones
     @FXML    private TableView<Habitacion> tvHabitaciones;
     private FilteredList<Habitacion> listaHabitaciones;
     private ObservableList<Habitacion> obsHabitaciones;
-
+    //Reservas
     @FXML    private TableView<Reserva> tvReservas;
     private FilteredList<Reserva> listaReservas;
     private ObservableList<Reserva> obsReservas;
@@ -102,7 +103,7 @@ public class ControladorVentanaPrincipal {
         try {
             Parent raiz = fxmlLoader.load();
 
-            Scene escena = new Scene(raiz, 1024, 720);
+            Scene escena = new Scene(raiz);
             Stage escenario = new Stage();
             escenario.setScene(escena);
             escenario.initModality(Modality.APPLICATION_MODAL);

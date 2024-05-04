@@ -24,7 +24,7 @@
    <children>
       <Accordion>
         <panes>
-          <TitledPane animated="false" prefHeight="933.0" prefWidth="800.0" text="Insertar Huesped">
+          <TitledPane prefHeight="933.0" prefWidth="800.0" text="Insertar Huesped">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -50,7 +50,7 @@
                               </TableView>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.rowIndex="2">
                                  <children>
-                                    <Button fx:id="btnInsertarHuesped" mnemonicParsing="false" onAction="#actInsertarHuesped" text="Insertar Nuevo Huesped" />
+                                    <Button fx:id="btnHuInsertar" mnemonicParsing="false" onAction="#actInsertarHuesped" text="Insertar Nuevo Huesped" />
                                     <Button fx:id="btnLimpiar" mnemonicParsing="false" onAction="#actLimpiar" text="Limpiar" />
                                  </children>
                               </HBox>
@@ -69,7 +69,7 @@
                                           <Insets bottom="10.0" right="10.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfBuscarHuesped" alignment="BOTTOM_CENTER" onAction="#actBuscarHuesped">
+                                    <TextField fx:id="tfHuFiltrar" alignment="BOTTOM_CENTER" onAction="#actBuscarHuesped">
                                        <HBox.margin>
                                           <Insets bottom="7.0" />
                                        </HBox.margin>
@@ -99,19 +99,19 @@
                                     </VBox>
                                     <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="20.0" GridPane.columnIndex="1">
                                        <children>
-                                          <TextField fx:id="tfDni">
+                                          <TextField fx:id="tfHuDni">
                                              <VBox.margin>
                                                 <Insets right="100.0" />
                                              </VBox.margin>
                                           </TextField>
-                                          <TextField fx:id="tfNombre" />
-                                          <TextField fx:id="tfCorreo" layoutX="10.0" layoutY="145.0" />
-                                          <TextField fx:id="tfTelefono" layoutX="10.0" layoutY="120.0">
+                                          <TextField fx:id="tfHuNombre" />
+                                          <TextField fx:id="tfHuCorreo" layoutX="10.0" layoutY="145.0" />
+                                          <TextField fx:id="tfHuTelefono" layoutX="10.0" layoutY="120.0">
                                              <VBox.margin>
                                                 <Insets right="100.0" />
                                              </VBox.margin>
                                           </TextField>
-                                          <DatePicker fx:id="dpFechaNac" />
+                                          <DatePicker fx:id="dpHuFechaNac" />
                                        </children>
                                        <opaqueInsets>
                                           <Insets />
@@ -137,7 +137,7 @@
                   </AnchorPane>
             </content>
           </TitledPane>
-          <TitledPane animated="false" text="Insertar Habitacion">
+          <TitledPane text="Insertar Habitacion">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="819.0" prefWidth="798.0">
                      <children>
@@ -152,11 +152,76 @@
                               <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <TableView fx:id="tvHuespedes1" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <VBox alignment="CENTER_RIGHT" prefHeight="404.0" prefWidth="187.0" spacing="13.0">
+                                       <children>
+                                          <Label text="Planta">
+                                             <VBox.margin>
+                                                <Insets top="7.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label text="Puerta" />
+                                          <Label text="Precio">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label text="Tipo de habitacion">
+                                             <VBox.margin>
+                                                <Insets top="19.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label text="Camas Individuales">
+                                             <VBox.margin>
+                                                <Insets top="24.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label text="Camas Dobles" />
+                                          <Label text="Baños" />
+                                          <Label text="Jacuzzi" />
+                                       </children>
+                                       <padding>
+                                          <Insets left="20.0" right="10.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox alignment="CENTER_LEFT" prefHeight="409.0" prefWidth="313.0" spacing="5.0">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <padding>
+                                          <Insets left="10.0" right="20.0" />
+                                       </padding>
+                                       <children>
+                                          <ComboBox fx:id="cbHabPlanta" prefWidth="150.0" />
+                                          <ComboBox fx:id="cbHabPuerta" prefWidth="150.0" />
+                                          <TextField fx:id="tfHabPrecio" prefHeight="25.0" prefWidth="176.0">
+                                             <VBox.margin>
+                                                <Insets right="80.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <ChoiceBox fx:id="cbHabTipo" prefWidth="150.0">
+                                             <VBox.margin>
+                                                <Insets bottom="3.0" top="20.0" />
+                                             </VBox.margin>
+                                          </ChoiceBox>
+                                          <ChoiceBox fx:id="cbHabCamInd" prefWidth="150.0">
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                          </ChoiceBox>
+                                          <ChoiceBox fx:id="cbCamDob" prefWidth="150.0" />
+                                          <ChoiceBox fx:id="cbHabBanios" prefWidth="150.0" />
+                                          <CheckBox fx:id="chJacuzzi" mnemonicParsing="false" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <TableView fx:id="tvHabitaciones" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <columns>
-                                    <TableColumn minWidth="20.0" prefWidth="128.0" text="Identificador" />
-                                    <TableColumn minWidth="20.0" prefWidth="128.0" text="Tipo" />
-                                    <TableColumn maxWidth="179.0" minWidth="20.0" prefWidth="128.0" text="Precio" />
+                                    <TableColumn fx:id="tcHabId" minWidth="20.0" prefWidth="128.0" text="Identificador" />
+                                    <TableColumn fx:id="tcHabTipo" minWidth="20.0" prefWidth="128.0" text="Tipo" />
+                                    <TableColumn fx:id="tcHabPrecio" maxWidth="179.0" minWidth="20.0" prefWidth="128.0" text="Precio" />
                                  </columns>
                                  <GridPane.margin>
                                     <Insets left="10.0" right="10.0" />
@@ -164,7 +229,7 @@
                               </TableView>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.rowIndex="2">
                                  <children>
-                                    <Button fx:id="btnInsertarHuesped1" mnemonicParsing="false" onAction="#actInsertarHuesped" text="Insertar Nueva Habitacion" />
+                                    <Button fx:id="btnHabInsertar" mnemonicParsing="false" onAction="#actInsertarHabitacion" text="Insertar Nueva Habitacion" />
                                     <Button fx:id="btnLimpiar1" mnemonicParsing="false" onAction="#actLimpiar" text="Limpiar" />
                                  </children>
                               </HBox>
@@ -183,101 +248,13 @@
                                           <Insets bottom="10.0" right="10.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfBuscarHab" alignment="BOTTOM_CENTER" onAction="#actBuscarHuesped">
+                                    <TextField fx:id="tfHabFiltrar" alignment="BOTTOM_CENTER" onAction="#btnBuscarHabitacion">
                                        <HBox.margin>
                                           <Insets bottom="7.0" />
                                        </HBox.margin>
                                     </TextField>
                                  </children>
                               </HBox>
-                              <GridPane maxHeight="700.0" maxWidth="456.0" GridPane.rowIndex="1" GridPane.rowSpan="2">
-                                 <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="135.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="265.0" />
-                                 </columnConstraints>
-                                 <rowConstraints>
-                                    <RowConstraints maxHeight="305.0" minHeight="10.0" prefHeight="144.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="308.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="207.0" minHeight="10.0" prefHeight="207.0" vgrow="SOMETIMES" />
-                                 </rowConstraints>
-                                 <children>
-                                    <VBox alignment="CENTER_RIGHT" prefHeight="267.0" prefWidth="150.0" spacing="15.0">
-                                       <children>
-                                          <Label text="Tipo de habitacion" />
-                                          <Label layoutX="10.0" layoutY="10.0" text="Planta" />
-                                          <Label layoutX="10.0" layoutY="44.0" text="Puerta" />
-                                          <Label layoutX="10.0" layoutY="27.0" text="Precio" />
-                                       </children>
-                                       <padding>
-                                          <Insets right="10.0" />
-                                       </padding>
-                                       <GridPane.margin>
-                                          <Insets top="20.0" />
-                                       </GridPane.margin>
-                                    </VBox>
-                                    <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                       <padding>
-                                          <Insets left="10.0" right="20.0" />
-                                       </padding>
-                                       <children>
-                                          <ChoiceBox fx:id="cbTipoHab" prefWidth="150.0">
-                                             <VBox.margin>
-                                                <Insets bottom="3.0" />
-                                             </VBox.margin>
-                                          </ChoiceBox>
-                                          <ComboBox fx:id="cbPlanta" prefWidth="150.0" />
-                                          <ComboBox fx:id="cbPuerta" prefWidth="150.0" />
-                                          <TextField fx:id="tfPrecio">
-                                             <VBox.margin>
-                                                <Insets right="150.0" />
-                                             </VBox.margin>
-                                          </TextField>
-                                       </children>
-                                       <GridPane.margin>
-                                          <Insets top="20.0" />
-                                       </GridPane.margin>
-                                    </VBox>
-                                    <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="15.0" GridPane.rowIndex="1">
-                                       <children>
-                                          <Label text="Camas Individuales" />
-                                          <Label text="Camas Dobles" />
-                                       </children>
-                                    </VBox>
-                                    <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="8.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                       <children>
-                                          <ChoiceBox fx:id="cbCamInd" prefWidth="150.0" />
-                                          <ChoiceBox fx:id="cbCamDob" prefWidth="150.0" />
-                                       </children>
-                                       <GridPane.margin>
-                                          <Insets left="10.0" />
-                                       </GridPane.margin>
-                                    </VBox>
-                                    <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.rowIndex="2">
-                                       <children>
-                                          <Label text="Baños" />
-                                          <Label text="Jacuzzi" />
-                                       </children>
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                       <GridPane.margin>
-                                          <Insets top="8.0" />
-                                       </GridPane.margin>
-                                    </VBox>
-                                    <VBox prefHeight="120.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                       <children>
-                                          <ChoiceBox fx:id="cbBanios" prefWidth="150.0" />
-                                          <CheckBox fx:id="chJacuzzi" mnemonicParsing="false" />
-                                       </children>
-                                       <GridPane.margin>
-                                          <Insets left="10.0" top="5.0" />
-                                       </GridPane.margin>
-                                    </VBox>
-                                 </children>
-                              </GridPane>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="63.0" prefWidth="400.0" text="Formulario de registro de una habitacion:" textAlignment="CENTER">
@@ -293,7 +270,7 @@
                   </AnchorPane>
             </content>
           </TitledPane>
-          <TitledPane animated="false" prefHeight="825.0" prefWidth="800.0" text="Insertar Reserva">
+          <TitledPane prefHeight="825.0" prefWidth="800.0" text="Insertar Reserva">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -308,10 +285,12 @@
                               <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <TableView fx:id="tvHuespedes2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <TableView fx:id="tvReservas" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <columns>
-                                    <TableColumn prefWidth="110.0" text="DNI" />
-                                    <TableColumn prefWidth="287.0" text="Nombre" />
+                                    <TableColumn fx:id="tcResDni" prefWidth="110.0" text="DNI" />
+                                    <TableColumn fx:id="tcResId" prefWidth="85.0" text="Habitacion" />
+                                    <TableColumn fx:id="tcResInicio" prefWidth="98.0" text="Inicio" />
+                                    <TableColumn fx:id="tcResFin" prefWidth="86.0" text="Final" />
                                  </columns>
                                  <GridPane.margin>
                                     <Insets left="10.0" right="10.0" />
@@ -319,8 +298,8 @@
                               </TableView>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.rowIndex="2">
                                  <children>
-                                    <Button fx:id="btnInsertarHuesped2" mnemonicParsing="false" onAction="#actInsertarHuesped" text="Insertar Nuevo Huesped" />
-                                    <Button fx:id="btnLimpiar2" mnemonicParsing="false" onAction="#actLimpiar" text="Limpiar" />
+                                    <Button fx:id="btnResInsertar" mnemonicParsing="false" onAction="#actInsertarReservar" text="Insertar Nueva Reserva" />
+                                    <Button fx:id="btnResLimpiar" mnemonicParsing="false" onAction="#actLimpiar" text="Limpiar" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -333,12 +312,12 @@
                               </HBox>
                               <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                  <children>
-                                    <Label alignment="BOTTOM_CENTER" text="Buscar Huesped: ">
+                                    <Label alignment="BOTTOM_CENTER" text="Buscar Reserva: ">
                                        <HBox.margin>
                                           <Insets bottom="10.0" right="10.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfBuscarHuesped2" alignment="BOTTOM_CENTER" onAction="#actBuscarHuesped">
+                                    <TextField fx:id="tfResFiltrar" alignment="BOTTOM_CENTER" onAction="#actBuscarReserva">
                                        <HBox.margin>
                                           <Insets bottom="7.0" />
                                        </HBox.margin>
@@ -357,10 +336,19 @@
                                     <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="28.0">
                                        <children>
                                           <Label text="DNI" />
-                                          <Label layoutX="10.0" layoutY="10.0" text="Nombre" />
-                                          <Label layoutX="10.0" layoutY="44.0" text="Correo" />
-                                          <Label layoutX="10.0" layoutY="27.0" text="Telefono" />
-                                          <Label layoutX="10.0" layoutY="61.0" text="Fecha de nacimiento" />
+                                          <Label layoutX="10.0" layoutY="10.0" text="Tipo Habitacion">
+                                             <VBox.margin>
+                                                <Insets top="25.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label layoutX="10.0" layoutY="44.0" text="Regimen" />
+                                          <Label text="Numero de personas" />
+                                          <Label layoutX="10.0" layoutY="27.0" text="Fecha de Inicio">
+                                             <VBox.margin>
+                                                <Insets top="25.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label layoutX="10.0" layoutY="61.0" text="Fecha de Fin" />
                                        </children>
                                        <padding>
                                           <Insets right="10.0" />
@@ -368,19 +356,24 @@
                                     </VBox>
                                     <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="20.0" GridPane.columnIndex="1">
                                        <children>
-                                          <TextField fx:id="tfDni2">
+                                          <TextField fx:id="tfResDni">
                                              <VBox.margin>
                                                 <Insets right="100.0" />
                                              </VBox.margin>
                                           </TextField>
-                                          <TextField fx:id="tfNombre2" />
-                                          <TextField fx:id="tfCorreo2" layoutX="10.0" layoutY="145.0" />
-                                          <TextField fx:id="tfTelefono2" layoutX="10.0" layoutY="120.0">
+                                          <ChoiceBox fx:id="cbResTipo" prefWidth="150.0">
                                              <VBox.margin>
-                                                <Insets right="100.0" />
+                                                <Insets top="25.0" />
                                              </VBox.margin>
-                                          </TextField>
-                                          <DatePicker fx:id="dpFechaNac2" />
+                                          </ChoiceBox>
+                                          <ChoiceBox fx:id="cbResRegimen" prefWidth="150.0" />
+                                          <ChoiceBox fx:id="cbResPersonas" prefWidth="150.0" />
+                                          <DatePicker fx:id="dpResInicio">
+                                             <VBox.margin>
+                                                <Insets top="25.0" />
+                                             </VBox.margin>
+                                          </DatePicker>
+                                          <DatePicker fx:id="dpResFin" />
                                        </children>
                                        <opaqueInsets>
                                           <Insets />
@@ -393,7 +386,7 @@
                               </GridPane>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="63.0" prefWidth="400.0" text="Formulario de registro de un huesped:" textAlignment="CENTER">
+                                    <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="63.0" prefWidth="400.0" text="Formulario de registro de una reserva:" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="18.0" />
                                        </font>
