@@ -4,13 +4,13 @@ import org.iesalandalus.programacion.reservashotel.vista.Vista;
 
 public class VistaGrafica extends Vista {
 
-    private VistaGrafica instancia;
+    private static VistaGrafica instancia;
 
-    public VistaGrafica(){
+    private VistaGrafica(){
 
     }
 
-    public VistaGrafica getInstancia() {
+    public static VistaGrafica getInstancia() {
         if (instancia==null)
             instancia=new VistaGrafica();
 
