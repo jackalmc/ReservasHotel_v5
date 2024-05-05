@@ -27,7 +27,7 @@ public class Reservas implements IReservas {
 
     private List<Reserva> copiaProfundaReservas(){
         if (coleccionReservas==null)
-            throw new NullPointerException("La colección no ha sido creada aún");
+            throw new NullPointerException("La coleccion no ha sido creada aun");
 
         List<Reserva> copia = new ArrayList<>();
 
@@ -80,9 +80,9 @@ public class Reservas implements IReservas {
     @Override
     public List<Reserva> getReservas(Huesped huesped){
         if (coleccionReservas==null)
-            throw new NullPointerException("La colección no ha sido creada aún");
+            throw new NullPointerException("La coleccion no ha sido creada aun");
         if (huesped == null)
-            throw new NullPointerException("ERROR: No se pueden buscar reservas de un huésped nulo.");
+            throw new NullPointerException("ERROR: No se pueden buscar reservas de un huesped nulo.");
 
         List<Reserva> copiaEspecial = new ArrayList<>();
 
@@ -100,9 +100,9 @@ public class Reservas implements IReservas {
     @Override
     public List<Reserva> getReservas(TipoHabitacion tipoHabitacion){
         if (coleccionReservas==null)
-            throw new NullPointerException("La colección no ha sido creada aún");
+            throw new NullPointerException("La coleccion no ha sido creada aun");
         if (tipoHabitacion == null)
-            throw new NullPointerException("ERROR: No se pueden buscar reservas de un tipo de habitación nula.");
+            throw new NullPointerException("ERROR: No se pueden buscar reservas de un tipo de habitacion nula.");
 
         List<Reserva> copiaEspecial = new ArrayList<>();
 
@@ -132,9 +132,9 @@ public class Reservas implements IReservas {
     @Override
     public List<Reserva> getReservas(Habitacion habitacion){
         if (coleccionReservas==null)
-            throw new NullPointerException("La colección no ha sido creada aún");
+            throw new NullPointerException("La coleccion no ha sido creada aun");
         if (habitacion==null)
-            throw new NullPointerException("ERROR: No se pueden buscar reservas de una habitación nula.");
+            throw new NullPointerException("ERROR: No se pueden buscar reservas de una habitacion nula.");
 
         List<Reserva> copiaEspecial = new ArrayList<>();
 
@@ -147,9 +147,9 @@ public class Reservas implements IReservas {
     @Override
     public List<Reserva> getReservasFuturas(Habitacion habitacion){
         if (coleccionReservas==null)
-            throw new NullPointerException("La colección no ha sido creada aún");
+            throw new NullPointerException("La coleccion no ha sido creada aun");
         if (habitacion==null)
-            throw new NullPointerException("ERROR: No se pueden buscar reservas de una habitación nula.");
+            throw new NullPointerException("ERROR: No se pueden buscar reservas de una habitacion nula.");
 
         List<Reserva> copiaEspecial = new ArrayList<>();
 
@@ -173,7 +173,7 @@ public class Reservas implements IReservas {
         if (fecha.isBefore(reserva.getFechaInicioReserva().atStartOfDay()))
             throw new IllegalArgumentException("El CheckIn no puede realizarse antes de la fecha de inicio de la reserva");
         if (fecha.isAfter(reserva.getFechaFinReserva().atStartOfDay()))
-            throw new IllegalArgumentException("No puede hacerse un CheckIn después de la fecha fin de reserva");
+            throw new IllegalArgumentException("No puede hacerse un CheckIn despues de la fecha fin de reserva");
 
 
         reserva.setCheckIn(fecha);
@@ -190,7 +190,7 @@ public class Reservas implements IReservas {
         if (fecha.isBefore(reserva.getCheckIn()))
             throw new IllegalArgumentException("No se puede hacer un CheckOut antes de la fecha del CheckIn");
         if (fecha.isAfter(reserva.getFechaFinReserva().atStartOfDay().plusHours(Reserva.MAX_HORAS_POSTERIOR_CHECKOUT)))
-            throw new IllegalArgumentException("El Checkout no puede hacerse después del periodo máximo permitido");
+            throw new IllegalArgumentException("El Checkout no puede hacerse despues del periodo maximo permitido");
 
         reserva.setCheckOut(fecha);
     }

@@ -120,15 +120,17 @@ public class ControladorInsertar {
         cbHabTipo.setItems(obsTipo);
         obsBanios.setAll(1,2,3);
         cbHabBanios.setItems(obsBanios);
-        obsCamInd.setAll(1,2,3);
+        obsCamInd.setAll(0,1,2,3);
         cbHabCamInd.setItems(obsCamInd);
-        obsCamDob.setAll(1,2);
+        obsCamDob.setAll(0,1,2);
         cbCamDob.setItems(obsCamDob);
         cbResTipo.setItems(obsTipo);
         obsPersonas.setAll(1,2,3,4);
         cbResPersonas.setItems(obsPersonas);
         obsRegimen.setAll(Regimen.values());
         cbResRegimen.setItems(obsRegimen);
+
+        actLimpiar(null);
 
     }
     @FXML
@@ -165,15 +167,38 @@ public class ControladorInsertar {
 
     @FXML
     void actInsertarHabitacion(ActionEvent event) {
+        Habitacion habitacionAInsertar=null;
+
         if(Dialogos.mostrarDialogoConfirmacion("Insertar Habitacion", "Seguro que quiere introducir esta habitacion?")){
             try{
-                //dividir segun tipo
+                switch (cbHabTipo.getSelectionModel().getSelectedItem()){
+                    case SIMPLE -> habitacionAInsertar = new Simple(cbHabPlanta.getSelectionModel().getSelectedItem(),
+                            cbHabPuerta.getSelectionModel().getSelectedItem(),
+                            Double.parseDouble(tfHabPrecio.getText()));
+                    case DOBLE -> habitacionAInsertar = new Doble(cbHabPlanta.getSelectionModel().getSelectedItem(),
+                            cbHabPuerta.getSelectionModel().getSelectedItem(),
+                            Double.parseDouble(tfHabPrecio.getText()),
+                            cbHabCamInd.getSelectionModel().getSelectedItem(),
+                            cbCamDob.getSelectionModel().getSelectedItem());
+                    case TRIPLE -> habitacionAInsertar = new Triple(cbHabPlanta.getSelectionModel().getSelectedItem(),
+                            cbHabPuerta.getSelectionModel().getSelectedItem(),
+                            Double.parseDouble(tfHabPrecio.getText()),
+                            cbHabBanios.getSelectionModel().getSelectedItem(),
+                            cbHabCamInd.getSelectionModel().getSelectedItem(),
+                            cbCamDob.getSelectionModel().getSelectedItem());
+                    case SUITE -> habitacionAInsertar = new Suite(cbHabPlanta.getSelectionModel().getSelectedItem(),
+                            cbHabPuerta.getSelectionModel().getSelectedItem(),
+                            Double.parseDouble(tfHabPrecio.getText()),
+                            cbHabBanios.getSelectionModel().getSelectedItem(),
+                            chJacuzzi.isSelected());
+                }
+                VistaGrafica.getInstancia().getControlador().insertar(habitacionAInsertar);
                 Dialogos.mostrarDialogoInformacion("Habitacion Insertada", "La habitacion ha sido insertada con exito!");
 
                 colReservas= VistaGrafica.getInstancia().getControlador().getReservas();
                 obsReservas.setAll(colReservas);
 
-            }catch(IllegalArgumentException | NullPointerException  e){
+            }catch(IllegalArgumentException | NullPointerException | OperationNotSupportedException  e){
                 Dialogos.mostrarDialogoError("Error al insertar", e.getMessage());
             }
         }else{
@@ -207,7 +232,14 @@ public class ControladorInsertar {
         if(Dialogos.mostrarDialogoConfirmacion("Insertar Reserva", "Seguro que quiere introducir esta reserva?")){
             try{
                 VistaGrafica.getInstancia().getControlador().insertar(
-                        new Reserva(null));
+                        new Reserva(VistaGrafica.getInstancia().getControlador().buscar(new Huesped(tfResDni.getText(),"dummy","asdf@fdsa.com","951161616",LocalDate.of(2000,10,10))),
+                                VistaGrafica.getInstancia().getControlador().buscar(new Simple(0,0,0)),
+                                cbResRegimen.getSelectionModel().getSelectedItem(),
+                                dpResFin.getValue(),
+                                dpResInicio.getValue(),
+                                cbResPersonas.getSelectionModel().getSelectedItem()
+
+                        ));
                 Dialogos.mostrarDialogoInformacion("Reserva Insertada", "La reserva ha sido insertado con exito!");
 
                 colReservas= VistaGrafica.getInstancia().getControlador().getReservas();
@@ -229,15 +261,15 @@ public class ControladorInsertar {
         tfHuTelefono.clear();
         tfHabPrecio.clear();
         tfResDni.clear();
-        cbResRegimen.getSelectionModel().clearSelection();
-        cbResPersonas.getSelectionModel().clearSelection();
-        cbResTipo.getSelectionModel().clearSelection();
-        cbCamDob.getSelectionModel().clearSelection();
-        cbHabCamInd.getSelectionModel().clearSelection();
-        cbHabBanios.getSelectionModel().clearSelection();
-        cbHabTipo.getSelectionModel().clearSelection();
-        cbHabPuerta.getSelectionModel().clearSelection();
-        cbHabPlanta.getSelectionModel().clearSelection();
+        cbResRegimen.getSelectionModel().selectFirst();
+        cbResPersonas.getSelectionModel().selectFirst();
+        cbResTipo.getSelectionModel().selectFirst();
+        cbCamDob.getSelectionModel().selectFirst();
+        cbHabCamInd.getSelectionModel().selectFirst();
+        cbHabBanios.getSelectionModel().selectFirst();
+        cbHabTipo.getSelectionModel().selectFirst();
+        cbHabPuerta.getSelectionModel().selectFirst();
+        cbHabPlanta.getSelectionModel().selectFirst();
     }
 
     @FXML

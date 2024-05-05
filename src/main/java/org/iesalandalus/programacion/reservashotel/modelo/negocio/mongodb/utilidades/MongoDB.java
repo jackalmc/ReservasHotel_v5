@@ -60,7 +60,7 @@ public class MongoDB {
 
     public static MongoDatabase getBD(){
         if (conexion == null)
-            throw new NullPointerException("Conexión es nula");
+            throw new NullPointerException("Conexion es nula");
 
         return conexion.getDatabase(BD);
     }
@@ -78,7 +78,7 @@ public class MongoDB {
        conexion = MongoClients.create(settings);
 
        if (conexion != null)
-           System.out.println("Conexión establecida!");
+           System.out.println("Conexion establecida!");
 
     }
 

@@ -27,7 +27,7 @@ public class Habitaciones implements IHabitaciones {
     @Override
     public List<Habitacion> get(TipoHabitacion tipoHabitacion){
         if (coleccionHabitaciones==null)
-            throw new NullPointerException("La colección no ha sido creada aún");
+            throw new NullPointerException("La coleccion no ha sido creada aun");
 
         List<Habitacion> copiaEspecial = new ArrayList<>();
 
@@ -57,7 +57,7 @@ public class Habitaciones implements IHabitaciones {
 
     private List<Habitacion> copiaProfundaHabitaciones(){
         if (coleccionHabitaciones==null)
-            throw new NullPointerException("La colección no ha sido creada aún");
+            throw new NullPointerException("La coleccion no ha sido creada aun");
 
         List<Habitacion> copia = new ArrayList<>();
 
@@ -83,9 +83,9 @@ public class Habitaciones implements IHabitaciones {
     @Override
     public void insertar(Habitacion habitacion)throws OperationNotSupportedException{
         if (habitacion == null)
-            throw new NullPointerException("ERROR: No se puede insertar una habitación nula.");
+            throw new NullPointerException("ERROR: No se puede insertar una habitacion nula.");
         if (coleccionHabitaciones.contains(habitacion))
-            throw new OperationNotSupportedException("ERROR: Ya existe una habitación con ese identificador.");
+            throw new OperationNotSupportedException("ERROR: Ya existe una habitacion con ese identificador.");
 
         if (habitacion instanceof Simple)
             coleccionHabitaciones.add(new Simple((Simple) habitacion));
@@ -101,7 +101,7 @@ public class Habitaciones implements IHabitaciones {
     @Override
     public Habitacion buscar(Habitacion habitacion){
         if (habitacion == null)
-            throw new NullPointerException("ERROR: No se puede buscar una habitación nula.");
+            throw new NullPointerException("ERROR: No se puede buscar una habitacion nula.");
 
         Habitacion habitacionEncontrada = null;
         for (Habitacion habitacion1 : coleccionHabitaciones){
@@ -123,9 +123,9 @@ public class Habitaciones implements IHabitaciones {
     @Override
     public void borrar(Habitacion habitacion)throws OperationNotSupportedException{
         if (habitacion == null)
-            throw new NullPointerException("ERROR: No se puede borrar una habitación nula.");
+            throw new NullPointerException("ERROR: No se puede borrar una habitacion nula.");
         if (!coleccionHabitaciones.contains(habitacion))
-            throw new OperationNotSupportedException("ERROR: No existe ninguna habitación como la indicada.");
+            throw new OperationNotSupportedException("ERROR: No existe ninguna habitacion como la indicada.");
 
 
         coleccionHabitaciones.remove(habitacion);

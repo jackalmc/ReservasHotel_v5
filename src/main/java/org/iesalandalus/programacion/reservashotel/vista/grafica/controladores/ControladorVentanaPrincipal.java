@@ -1,5 +1,7 @@
 package org.iesalandalus.programacion.reservashotel.vista.grafica.controladores;
 
+        import javafx.beans.property.SimpleStringProperty;
+        import javafx.collections.FXCollections;
         import javafx.collections.ObservableList;
         import javafx.collections.transformation.FilteredList;
         import javafx.event.ActionEvent;
@@ -17,10 +19,12 @@ package org.iesalandalus.programacion.reservashotel.vista.grafica.controladores;
         import org.iesalandalus.programacion.reservashotel.modelo.dominio.Habitacion;
         import org.iesalandalus.programacion.reservashotel.modelo.dominio.Huesped;
         import org.iesalandalus.programacion.reservashotel.modelo.dominio.Reserva;
+        import org.iesalandalus.programacion.reservashotel.vista.grafica.VistaGrafica;
         import org.iesalandalus.programacion.reservashotel.vista.grafica.recursos.LocalizadorRecursos;
         import org.iesalandalus.programacion.reservashotel.vista.grafica.utilidades.Dialogos;
 
         import java.io.IOException;
+        import java.time.format.DateTimeFormatter;
 
 public class ControladorVentanaPrincipal {
 
@@ -48,11 +52,11 @@ public class ControladorVentanaPrincipal {
     @FXML    private TableColumn<?, ?> tcHabJacuzzi;
     @FXML    private TableColumn<?, ?> tcHabPrecio;
     @FXML    private TableColumn<?, ?> tcHabTipo;
-    @FXML    private TableColumn<?, ?> tcHuCorreo;
-    @FXML    private TableColumn<?, ?> tcHuDni;
-    @FXML    private TableColumn<?, ?> tcHuFechaIni;
-    @FXML    private TableColumn<?, ?> tcHuNombre;
-    @FXML    private TableColumn<?, ?> tcHuTlf;
+    @FXML    private TableColumn<Huesped, String> tcHuCorreo;
+    @FXML    private TableColumn<Huesped, String> tcHuDni;
+    @FXML    private TableColumn<Huesped, String> tcHuFechaIni;
+    @FXML    private TableColumn<Huesped, String> tcHuNombre;
+    @FXML    private TableColumn<Huesped, String> tcHuTlf;
     @FXML    private TableColumn<?, ?> tcResDNI;
     @FXML    private TableColumn<?, ?> tcResFechaFin;
     @FXML    private TableColumn<?, ?> tcResFechaInic;
@@ -69,7 +73,7 @@ public class ControladorVentanaPrincipal {
     // Huespedes
     @FXML    private TableView<Huesped> tvHuespedes;
     private FilteredList<Huesped> listaHuespedes;
-    private ObservableList<Huesped> obsHuespedes;
+    private ObservableList<Huesped> obsHuespedes= FXCollections.observableArrayList();
     //Habitaciones
     @FXML    private TableView<Habitacion> tvHabitaciones;
     private FilteredList<Habitacion> listaHabitaciones;
@@ -79,6 +83,18 @@ public class ControladorVentanaPrincipal {
     private FilteredList<Reserva> listaReservas;
     private ObservableList<Reserva> obsReservas;
 
+    @FXML
+    void initialize(){
+        obsHuespedes.setAll(VistaGrafica.getInstancia().getControlador().getHuespedes());
+        listaHuespedes = new FilteredList<>(obsHuespedes, huesped -> true);
+        tvHuespedes.setItems(listaHuespedes);
+
+        tcHuDni.setCellValueFactory(huesped-> new SimpleStringProperty(huesped.getValue().getDni()));
+        tcHuCorreo.setCellValueFactory(huesped-> new SimpleStringProperty(huesped.getValue().getCorreo()));
+        tcHuFechaIni.setCellValueFactory(huesped-> new SimpleStringProperty(huesped.getValue().getFechaNacimiento().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+        tcHuTlf.setCellValueFactory(huesped-> new SimpleStringProperty(huesped.getValue().getTelefono()));
+        tcHuNombre.setCellValueFactory(huesped-> new SimpleStringProperty(huesped.getValue().getNombre()));
+    }
     @FXML
     void actAbrirBorrar(ActionEvent event) {
         FXMLLoader fxmlLoader = new FXMLLoader(LocalizadorRecursos.class.getResource("vistas/ventanaBorrar.fxml"));

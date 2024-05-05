@@ -24,7 +24,7 @@ public class Huespedes implements IHuespedes {
 
     private List<Huesped> copiaProfundaHuespedes(){
         if (coleccionHuespedes==null)
-            throw new NullPointerException("La colección no ha sido creada aún");
+            throw new NullPointerException("La coleccion no ha sido creada aun");
 
         List<Huesped> copia = new ArrayList<>();
 
@@ -43,9 +43,9 @@ public class Huespedes implements IHuespedes {
     @Override
     public void insertar(Huesped huesped) throws OperationNotSupportedException{
         if (huesped == null)
-            throw new NullPointerException("ERROR: No se puede insertar un huésped nulo.");
+            throw new NullPointerException("ERROR: No se puede insertar un huesped nulo.");
         if (coleccionHuespedes.contains(huesped))
-            throw new OperationNotSupportedException("ERROR: Ya existe un huésped con ese dni.");
+            throw new OperationNotSupportedException("ERROR: Ya existe un huesped con ese dni.");
 
         coleccionHuespedes.add(new Huesped(huesped));
     }
@@ -53,7 +53,7 @@ public class Huespedes implements IHuespedes {
     @Override
     public Huesped buscar(Huesped huesped){
         if (huesped == null)
-            throw new NullPointerException("ERROR: No se puede buscar un huésped nulo.");
+            throw new NullPointerException("ERROR: No se puede buscar un huesped nulo.");
 
         if (coleccionHuespedes.contains(huesped))
             return coleccionHuespedes.get(coleccionHuespedes.indexOf(huesped));
@@ -65,9 +65,9 @@ public class Huespedes implements IHuespedes {
     @Override
     public void borrar(Huesped huesped)throws OperationNotSupportedException{
         if (huesped == null)
-            throw new NullPointerException("ERROR: No se puede borrar un huésped nulo.");
+            throw new NullPointerException("ERROR: No se puede borrar un huesped nulo.");
         if (!coleccionHuespedes.contains(huesped))
-            throw new OperationNotSupportedException("ERROR: No existe ningún huésped como el indicado.");;
+            throw new OperationNotSupportedException("ERROR: No existe ningun huesped como el indicado.");;
 
         coleccionHuespedes.remove(huesped);
     }

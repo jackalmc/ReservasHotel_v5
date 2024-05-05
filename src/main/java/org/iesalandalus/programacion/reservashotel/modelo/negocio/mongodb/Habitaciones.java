@@ -62,9 +62,9 @@ public class Habitaciones implements IHabitaciones {
     @Override
     public void insertar(Habitacion habitacion){
         if (habitacion == null)
-            throw new NullPointerException("No se puede introducir una habitación nula");
+            throw new NullPointerException("No se puede introducir una habitacion nula");
         if (buscar(habitacion) != null)
-            throw new IllegalArgumentException("Ya existe esa habitación en la BD");
+            throw new IllegalArgumentException("Ya existe esa habitacion en la BD");
 
         Document documentoAIntroducir = MongoDB.getDocumento(habitacion);
         MongoDB.getBD().getCollection(COLECCION).insertOne(documentoAIntroducir); //funciona bien aunque diga que no.
@@ -72,7 +72,7 @@ public class Habitaciones implements IHabitaciones {
     @Override
     public Habitacion buscar(Habitacion habitacion){
         if (habitacion == null)
-            throw new NullPointerException("No se puede buscar una habitación nula");
+            throw new NullPointerException("No se puede buscar una habitacion nula");
 
         Document encontrado = MongoDB.getBD().getCollection(COLECCION).find(Filters.eq(MongoDB.IDENTIFICADOR,habitacion.getIdentificador())).first();
 
@@ -84,9 +84,9 @@ public class Habitaciones implements IHabitaciones {
     @Override
     public void borrar(Habitacion habitacion){
         if (habitacion == null)
-            throw new NullPointerException("No se puede borrar un huésped nulo");
+            throw new NullPointerException("No se puede borrar un huesped nulo");
         if (buscar(habitacion) == null)
-            throw new IllegalArgumentException("No existe ese huésped en la BD");
+            throw new IllegalArgumentException("No existe ese huesped en la BD");
 
         MongoDB.getBD().getCollection(COLECCION).deleteOne(Filters.eq(MongoDB.IDENTIFICADOR,habitacion.getIdentificador()));
 

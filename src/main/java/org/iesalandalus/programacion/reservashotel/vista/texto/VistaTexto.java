@@ -51,7 +51,7 @@ public class VistaTexto extends Vista {
             controlador.insertar(Consola.leerHuesped());
             System.out.println(" ");
             System.out.println("*****");
-            System.out.println("Huésped insertado!!!");
+            System.out.println("Huesped insertado!!!");
             System.out.println("*****");
             System.out.println(" ");
         }catch (NullPointerException | IllegalArgumentException | OperationNotSupportedException e){
@@ -65,7 +65,7 @@ public class VistaTexto extends Vista {
         Huesped buscado = Consola.getHuespedPorDni();
         try{
             if (controlador.buscar(buscado) == null)
-                System.out.println("---> Huésped no encontrado <---");
+                System.out.println("---> Huesped no encontrado <---");
             else
                 System.out.println(controlador.buscar(buscado));
         }catch (NullPointerException e){
@@ -112,7 +112,7 @@ public class VistaTexto extends Vista {
             controlador.insertar(Consola.leerHabitacion());
             System.out.println(" ");
             System.out.println("*****");
-            System.out.println("Habitación insertada!!!");
+            System.out.println("Habitacion insertada!!!");
             System.out.println("*****");
             System.out.println(" ");
         }catch (NullPointerException|IllegalArgumentException|OperationNotSupportedException e){
@@ -124,7 +124,7 @@ public class VistaTexto extends Vista {
         Habitacion buscado = Consola.leerHabitacionPorIdentificador();
         try{
             if (controlador.buscar(buscado) == null)
-                System.out.println("---> Habitación no encontrada <---");
+                System.out.println("---> Habitacion no encontrada <---");
             else
                 System.out.println(controlador.buscar(buscado));
         }catch (NullPointerException e){
@@ -138,7 +138,7 @@ public class VistaTexto extends Vista {
             controlador.borrar(Consola.leerHabitacionPorIdentificador());
             System.out.println(" ");
             System.out.println("*****");
-            System.out.println("Habitación borrada!!!");
+            System.out.println("Habitacion borrada!!!");
             System.out.println("*****");
             System.out.println(" ");
         }catch (NullPointerException|IllegalArgumentException|OperationNotSupportedException e){
@@ -219,7 +219,7 @@ public class VistaTexto extends Vista {
             }
 
         } else {
-            System.out.println("No está disponible");
+            System.out.println("No esta disponible");
         }
 
     }
@@ -376,7 +376,7 @@ public class VistaTexto extends Vista {
                 eleccion = Entrada.entero();
             }while (eleccion <0 || eleccion > lista.size());
 
-            //borrar reserva de la colección usando la posición de la lista nueva.
+            //borrar reserva de la coleccion usando la posicion de la lista nueva.
             try{
                 controlador.borrar(lista.get(eleccion));
                 System.out.println("**Reserva Eliminada!!!**");
@@ -391,7 +391,7 @@ public class VistaTexto extends Vista {
         List<Reserva> lista;
         lista = controlador.getReservas();
 
-        //fecha inicio, de reciente a mayor; habitación, identificador en ascendente
+        //fecha inicio, de reciente a mayor; habitacion, identificador en ascendente
         Comparator<Habitacion> habitacionComparator = Comparator.comparing(Habitacion::getIdentificador);
         lista.sort(Comparator.comparing(Reserva::getFechaInicioReserva).reversed().thenComparing(Reserva::getHabitacion, habitacionComparator));
 
@@ -407,7 +407,7 @@ public class VistaTexto extends Vista {
     }
 
     public void comprobarDisponibilidad(){
-        System.out.println("Elige tipo de Habitación deseada: ");
+        System.out.println("Elige tipo de Habitacion deseada: ");
         TipoHabitacion tipoHabitacion = Consola.leerTipoHabitacion();
         System.out.println("Introduce fecha de inicio de la reserva (dd/MM/yyyy): ");
         LocalDate fechaini = Consola.leerFecha(Entrada.cadena());
@@ -441,7 +441,7 @@ public class VistaTexto extends Vista {
                 if (numElementos == 0)
                 {
                     //Si la primera de las habitaciones encontradas del tipo solicitado no tiene reservas en el futuro,
-                    // quiere decir que está disponible.
+                    // quiere decir que esta disponible.
                     if (habitacionesTipoSolicitado[i] instanceof Simple)
                         habitacionDisponible=new Simple((Simple) habitacionesTipoSolicitado[i]);
                     else if (habitacionesTipoSolicitado[i] instanceof Doble)
@@ -457,7 +457,7 @@ public class VistaTexto extends Vista {
 
                     //Ordenamos de mayor a menor las reservas futuras encontradas por fecha de fin de la reserva.
                     // Si la fecha de inicio de la reserva es posterior a la mayor de las fechas de fin de las reservas
-                    // (la reserva de la posición 0), quiere decir que la habitación está disponible en las fechas indicadas.
+                    // (la reserva de la posicion 0), quiere decir que la habitacion esta disponible en las fechas indicadas.
 
                     Arrays.sort(reservasFuturas, 0, numElementos, Comparator.comparing(Reserva::getFechaFinReserva).reversed());
 
@@ -481,7 +481,7 @@ public class VistaTexto extends Vista {
                     {
                         //Ordenamos de menor a mayor las reservas futuras encontradas por fecha de inicio de la reserva.
                         // Si la fecha de fin de la reserva es anterior a la menor de las fechas de inicio de las reservas
-                        // (la reserva de la posición 0), quiere decir que la habitación está disponible en las fechas indicadas.
+                        // (la reserva de la posicion 0), quiere decir que la habitacion esta disponible en las fechas indicadas.
 
                         Arrays.sort(reservasFuturas, 0, numElementos, Comparator.comparing(Reserva::getFechaInicioReserva));
 
@@ -502,7 +502,7 @@ public class VistaTexto extends Vista {
                         }
                     }
 
-                    //Recorremos el array de reservas futuras para ver si las fechas solicitadas están algún hueco existente entre las fechas reservadas
+                    //Recorremos el array de reservas futuras para ver si las fechas solicitadas estan algun hueco existente entre las fechas reservadas
                     if (!tipoHabitacionEncontrada)
                     {
                         for(int j=1;j<reservasFuturas.length && !tipoHabitacionEncontrada;j++)
@@ -538,7 +538,7 @@ public class VistaTexto extends Vista {
 
     private static int getNumElementosNoNulos(List<Reserva> reservas){
         int numero=0;
-        //Tod-o lo que usa esto podría usar size() creo
+        //Tod-o lo que usa esto podria usar size() creo
         Iterator<Reserva> reservaIterator = reservas.iterator();
 
         while (reservaIterator.hasNext()){

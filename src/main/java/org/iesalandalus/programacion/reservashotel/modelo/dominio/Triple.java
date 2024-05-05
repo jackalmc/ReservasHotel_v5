@@ -34,7 +34,7 @@ public class Triple extends Habitacion{
 
     public void setNumBanos(int numBanos) {
         if (numBanos < MIN_NUM_BANOS || numBanos > MAX_NUM_BANOS)
-            throw new IllegalArgumentException("ERROR: El número de baños no puede ser inferior a 1 ni superior a 3");
+            throw new IllegalArgumentException("ERROR: El numero de banios no puede ser inferior a 1 ni superior a 3");
 
         this.numBanos = numBanos;
     }
@@ -45,7 +45,7 @@ public class Triple extends Habitacion{
 
     public void setNumCamasIndividuales(int numCamasIndividuales) {
         if (numCamasIndividuales < MIN_NUM_CAMAS_INDIVIDUALES || numCamasIndividuales > MAX_NUM_CAMAS_INDIVIDUALES)
-            throw new IllegalArgumentException("ERROR: El número de camas individuales de una habitación triple no puede ser inferior a 1 ni mayor que 3");
+            throw new IllegalArgumentException("ERROR: El numero de camas individuales de una habitacion triple no puede ser inferior a 1 ni mayor que 3");
 
         this.numCamasIndividuales = numCamasIndividuales;
     }
@@ -56,16 +56,16 @@ public class Triple extends Habitacion{
 
     public void setNumCamasDobles(int numCamasDobles) {
         if (numCamasDobles < MIN_NUM_CAMAS_DOBLES || numCamasDobles > MAX_NUM_CAMAS_DOBLES)
-            throw new IllegalArgumentException("ERROR: El número de camas dobles de una habitación triple no puede ser inferior a 0 ni mayor que 1");
+            throw new IllegalArgumentException("ERROR: El numero de camas dobles de una habitacion triple no puede ser inferior a 0 ni mayor que 1");
 
         this.numCamasDobles = numCamasDobles;
     }
 
     private void validaNumCamas(){
         if (numCamasDobles == 0 && numCamasIndividuales != 3)
-            throw new IllegalArgumentException("ERROR: La distribución de camas en una habitación triple tiene que ser 3 camas individuales y 0 doble o 1 cama individual y 1 doble");
+            throw new IllegalArgumentException("ERROR: La distribucion de camas en una habitacion triple tiene que ser 3 camas individuales y 0 doble o 1 cama individual y 1 doble");
         if (numCamasDobles == 1 && numCamasIndividuales != 1)
-            throw new IllegalArgumentException("ERROR: La distribución de camas en una habitación triple tiene que ser 3 camas individuales y 0 doble o 1 cama individual y 1 doble");
+            throw new IllegalArgumentException("ERROR: La distribucion de camas en una habitacion triple tiene que ser 3 camas individuales y 0 doble o 1 cama individual y 1 doble");
     }
 
     @Override
@@ -75,8 +75,8 @@ public class Triple extends Habitacion{
 
     @Override
     public String toString() {
-        return super.toString()+", habitación triple, capacidad="+getNumeroMaximoPersonas()
-                +" personas, baños="+getNumBanos()
+        return super.toString()+", habitacion triple, capacidad="+getNumeroMaximoPersonas()
+                +" personas, banios="+getNumBanos()
                 +", camas individuales="+getNumCamasIndividuales()
                 +", camas dobles="+getNumCamasDobles();
     }

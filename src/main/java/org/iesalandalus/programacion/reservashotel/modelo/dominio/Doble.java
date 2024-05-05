@@ -28,7 +28,7 @@ public class Doble extends Habitacion{
 
     public void setNumCamasIndividuales(int numCamasIndividuales) {
         if (numCamasIndividuales < MIN_NUM_CAMAS_INDIVIDUALES || numCamasIndividuales > MAX_NUM_CAMAS_INDIVIDUALES)
-            throw new IllegalArgumentException("ERROR: El número de camas individuales de una habitación doble no puede ser inferior a 0 ni mayor que 2");
+            throw new IllegalArgumentException("ERROR: El numero de camas individuales de una habitacion doble no puede ser inferior a 0 ni mayor que 2");
 
         this.numCamasIndividuales = numCamasIndividuales;
     }
@@ -39,15 +39,15 @@ public class Doble extends Habitacion{
 
     public void setNumCamasDobles(int numCamasDobles) {
         if (numCamasDobles < MIN_NUM_CAMAS_DOBLES || numCamasDobles > MAX_NUM_CAMAS_DOBLES)
-            throw new IllegalArgumentException("ERROR: El número de camas dobles de una habitación doble no puede ser inferior a 0 ni mayor que 1");
+            throw new IllegalArgumentException("ERROR: El numero de camas dobles de una habitacion doble no puede ser inferior a 0 ni mayor que 1");
         this.numCamasDobles = numCamasDobles;
     }
 
     private void validaNumCamas(){
         if (numCamasDobles == 0 && numCamasIndividuales != 2)
-            throw new IllegalArgumentException("ERROR: La distribución de camas en una habitación doble tiene que ser 2 camas individuales y 0 doble o 0 camas individuales y 1 doble");
+            throw new IllegalArgumentException("ERROR: La distribucion de camas en una habitacion doble tiene que ser 2 camas individuales y 0 doble o 0 camas individuales y 1 doble");
         if (numCamasDobles == 1 && numCamasIndividuales != 0)
-            throw new IllegalArgumentException("ERROR: La distribución de camas en una habitación doble tiene que ser 2 camas individuales y 0 doble o 0 camas individuales y 1 doble");
+            throw new IllegalArgumentException("ERROR: La distribucion de camas en una habitacion doble tiene que ser 2 camas individuales y 0 doble o 0 camas individuales y 1 doble");
     }
     @Override
     public int getNumeroMaximoPersonas(){
@@ -56,7 +56,7 @@ public class Doble extends Habitacion{
 
     @Override
     public String toString() {
-        return String.format(super.toString()+", habitación doble, capacidad=%d personas, camas individuales=%d, camas dobles=%d",
+        return String.format(super.toString()+", habitacion doble, capacidad=%d personas, camas individuales=%d, camas dobles=%d",
                 getNumeroMaximoPersonas(),getNumCamasIndividuales(), getNumCamasDobles());
     }
 }

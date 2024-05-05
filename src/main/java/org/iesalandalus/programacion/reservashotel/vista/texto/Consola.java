@@ -32,7 +32,7 @@ public class Consola {
         int numeroOpcion;
 
         do{
-            System.out.print("Elegir la opción deseada: ");
+            System.out.print("Elegir la opcion deseada: ");
             numeroOpcion = Entrada.entero();
         }while(numeroOpcion < 0 || numeroOpcion > Opcion.values().length);
 
@@ -45,15 +45,15 @@ public class Consola {
         LocalDate fechaNacimiento;
 
 
-        System.out.println("Introduzca el nombre del huésped: ");
+        System.out.println("Introduzca el nombre del huesped: ");
         nombre=Entrada.cadena();
-        System.out.println("Introduzca DNI del huésped: ");
+        System.out.println("Introduzca DNI del huesped: ");
         dni=Entrada.cadena().toUpperCase();
-        System.out.println("Introduzca Correo del huésped: ");
+        System.out.println("Introduzca Correo del huesped: ");
         correo=Entrada.cadena();
-        System.out.println("Introduzca teléfono del huésped: ");
+        System.out.println("Introduzca telefono del huesped: ");
         telefono=Entrada.cadena();
-        System.out.println("Introduzca fecha de nacimiento del huésped (dd/MM/yyyy): ");
+        System.out.println("Introduzca fecha de nacimiento del huesped (dd/MM/yyyy): ");
         fechaNacimiento= leerFecha(Entrada.cadena());
 
 
@@ -78,7 +78,7 @@ public class Consola {
 
         while(!m.matches()){
 
-            System.out.println("Introduzca una fecha válida (dd/MM/yyyy): ");
+            System.out.println("Introduzca una fecha valida (dd/MM/yyyy): ");
             mensaje = Entrada.cadena().trim();
             m = p.matcher(mensaje);
         }
@@ -93,7 +93,7 @@ public class Consola {
 
         while(!mensaje.matches(erFechaHora)){
 
-            System.out.println("Introduzca una fecha válida (dd/MM/yyyy HH:mm:ss): ");
+            System.out.println("Introduzca una fecha valida (dd/MM/yyyy HH:mm:ss): ");
             mensaje = Entrada.cadena().trim();
 
         }
@@ -107,7 +107,7 @@ public class Consola {
         TipoHabitacion tipoHabitacion = null;
         Habitacion habitacion = null;
 
-        System.out.print("Introduzca la planta de la habitación: "); //intento
+        System.out.print("Introduzca la planta de la habitacion: "); //intento
         try{
             planta = Entrada.entero();
         }catch (IllegalArgumentException e){
@@ -115,9 +115,9 @@ public class Consola {
             System.out.println("Prueba de nuevo: ");
             planta = Entrada.entero();
         }
-        System.out.println("Introduzca la puerta de la habitación: ");
+        System.out.println("Introduzca la puerta de la habitacion: ");
         puerta=Entrada.entero();
-        System.out.println("Introduzca precio de la habitación (40.0-150.0): ");
+        System.out.println("Introduzca precio de la habitacion (40.0-150.0): ");
         precio=Entrada.realDoble();
         tipoHabitacion = leerTipoHabitacion();
 
@@ -128,27 +128,27 @@ public class Consola {
                 break;
 
             case DOBLE:
-                System.out.println("¿Cuantas camas individuales?");
+                System.out.println("Cuantas camas individuales?");
                 individuales = Entrada.entero();
-                System.out.println("¿Cuantas camas dobles?");
+                System.out.println("Cuantas camas dobles?");
                 dobles = Entrada.entero();
                 habitacion = new Doble (planta,puerta,precio, individuales, dobles);
                 break;
 
             case TRIPLE:
-                System.out.println("¿Cuántas camas individuales?");
+                System.out.println("Cuantas camas individuales?");
                 individuales = Entrada.entero();
-                System.out.println("¿Cuántas camas dobles?");
+                System.out.println("Cuantas camas dobles?");
                 dobles = Entrada.entero();
-                System.out.println("¿Cuántos baños?");
+                System.out.println("Cuantos banios?");
                 banos = Entrada.entero();
                 habitacion = new Triple (planta, puerta, precio, banos, individuales, dobles);
                 break;
 
             case SUITE:
-                System.out.println("¿Cuántos baños?");
+                System.out.println("Cuantos banios?");
                 banos = Entrada.entero();
-                System.out.println("¿Con Jacuzzi?");
+                System.out.println("Con Jacuzzi?");
                 boolean conJacuzzi;
                 String respuesta;
                 do {
@@ -168,9 +168,9 @@ public class Consola {
     public static Habitacion leerHabitacionPorIdentificador(){
         int puerta, planta;
 
-        System.out.print("Introduzca la planta de la habitación: "); //intento
+        System.out.print("Introduzca la planta de la habitacion: "); //intento
         planta = Entrada.entero();
-        System.out.println("Introduzca la puerta de la habitación: ");
+        System.out.println("Introduzca la puerta de la habitacion: ");
         puerta=Entrada.entero();
 
         return new Simple(planta, puerta, 100);
@@ -180,7 +180,7 @@ public class Consola {
         int opcion;
 
         System.out.println("-----");
-        System.out.println("Elige tipo de habitación: ");
+        System.out.println("Elige tipo de habitacion: ");
 
         Iterator<TipoHabitacion> tipoHabitacionIterator = Arrays.stream(TipoHabitacion.values()).iterator();
         while (tipoHabitacionIterator.hasNext())
@@ -199,7 +199,7 @@ public class Consola {
         int opcion;
 
         System.out.println("-----");
-        System.out.println("Elige tipo de régimen: ");
+        System.out.println("Elige tipo de regimen: ");
 
         Iterator<Regimen> regimenIterator = Arrays.stream(Regimen.values()).iterator();
         while (regimenIterator.hasNext())

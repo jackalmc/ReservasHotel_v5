@@ -13,15 +13,15 @@ import java.util.List;
 
 public class Huespedes implements IHuespedes {
     private final String COLECCION="huespedes";
-    private List<Huesped> coleccionHuespedes; //aunque pongo colección, realmente no lo uso mucho, a favor de tirar más de métodos específicos de MongoDB.
+    private List<Huesped> coleccionHuespedes; //aunque pongo coleccion, realmente no lo uso mucho, a favor de tirar mas de metodos especificos de MongoDB.
 
     public Huespedes(){
         comenzar();
     }
     @Override
     public List<Huesped> get(){
-        /* Esto creo que está bien, pero lo cambio para usar el método específico de MongoDB, aunque esto estaría
-        bien para ahorrar una llamada al cluster, no se actualizaría en caso de haber varias personas añadiendo datos.
+        /* Esto creo que esta bien, pero lo cambio para usar el metodo especifico de MongoDB, aunque esto estaria
+        bien para ahorrar una llamada al cluster, no se actualizaria en caso de haber varias personas aniadiendo datos.
 
         List<Huesped> copiaOrdenada = new ArrayList<>();
 
@@ -47,17 +47,17 @@ public class Huespedes implements IHuespedes {
     @Override
     public void insertar(Huesped huesped){
         if (huesped == null)
-            throw new NullPointerException("No se puede introducir un huésped nulo");
+            throw new NullPointerException("No se puede introducir un huesped nulo");
 
         if (buscar(huesped) != null)
-            throw new IllegalArgumentException("Ya existe ese huésped en la BD");
+            throw new IllegalArgumentException("Ya existe ese huesped en la BD");
 
         MongoDB.getBD().getCollection(COLECCION).insertOne(MongoDB.getDocumento(huesped));
     }
     @Override
     public Huesped buscar(Huesped huesped){
         if (huesped == null)
-            throw new NullPointerException("No se puede buscar un huésped nulo");
+            throw new NullPointerException("No se puede buscar un huesped nulo");
 
         Document encontrado = MongoDB.getBD().getCollection(COLECCION).find(Filters.eq(MongoDB.DNI, huesped.getDni())).first();
 
@@ -69,9 +69,9 @@ public class Huespedes implements IHuespedes {
     @Override
     public void borrar(Huesped huesped){
         if (huesped == null)
-            throw new NullPointerException("No se puede borrar un huésped nulo");
+            throw new NullPointerException("No se puede borrar un huesped nulo");
         if (buscar(huesped) == null)
-            throw new IllegalArgumentException("No existe ese huésped en la BD");
+            throw new IllegalArgumentException("No existe ese huesped en la BD");
 
         MongoDB.getBD().getCollection(COLECCION).deleteOne(Filters.eq(MongoDB.DNI, huesped.getDni()));
     }

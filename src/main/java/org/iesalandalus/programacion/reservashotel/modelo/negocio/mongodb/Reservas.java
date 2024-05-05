@@ -18,7 +18,7 @@ import static com.mongodb.client.model.Filters.eq;
 
 public class Reservas implements IReservas {
     private final String COLECCION="reservas";
-    private List<Reserva> coleccionReservas; //aunque pongo colección, realmente no lo uso mucho, a favor de tirar más de métodos específicos de MongoDB.
+    private List<Reserva> coleccionReservas; //aunque pongo coleccion, realmente no lo uso mucho, a favor de tirar mas de metodos especificos de MongoDB.
 
     public Reservas(){
         comenzar();
@@ -37,13 +37,13 @@ public class Reservas implements IReservas {
     @Override
     public List<Reserva> getReservas(Huesped huesped){
         if (huesped==null)
-            throw new NullPointerException("Un huésped nulo no tiene reservas");
+            throw new NullPointerException("Un huesped nulo no tiene reservas");
 
         List<Reserva> copiaOrdenada = new ArrayList<>();
         FindIterable<Document> documents = MongoDB.getBD().getCollection(COLECCION).find().sort(Sorts.descending(MongoDB.FECHA_INICIO_RESERVA));
 
         for (Document document:documents) {
-            Document huespedecillo = (Document) document.get(MongoDB.HUESPED); //por alguna razón no me deja acceder usando directamente MongoDB.HUESPED_DNI como llave
+            Document huespedecillo = (Document) document.get(MongoDB.HUESPED); //por alguna razon no me deja acceder usando directamente MongoDB.HUESPED_DNI como llave
             if (huespedecillo.getString(MongoDB.DNI).equals(huesped.getDni()))
                 copiaOrdenada.add(MongoDB.getReserva(document));
         }
@@ -84,7 +84,7 @@ public class Reservas implements IReservas {
     @Override
     public List<Reserva> getReservas(Habitacion habitacion){
         if (habitacion == null)
-            throw new NullPointerException("No hay reservas de una habitación nula");
+            throw new NullPointerException("No hay reservas de una habitacion nula");
 
         List<Reserva> copiaOrdenada = new ArrayList<>();
         FindIterable<Document> documents = MongoDB.getBD().getCollection(COLECCION).find().sort(Sorts.descending(MongoDB.FECHA_INICIO_RESERVA));
@@ -98,7 +98,7 @@ public class Reservas implements IReservas {
     @Override
     public List<Reserva> getReservasFuturas(Habitacion habitacion){
         if (habitacion == null)
-            throw new NullPointerException("No hay reservas de una habitación nula");
+            throw new NullPointerException("No hay reservas de una habitacion nula");
 
         List<Reserva> copiaOrdenada = new ArrayList<>();
         FindIterable<Document> documents = MongoDB.getBD().getCollection(COLECCION).find().sort(Sorts.descending(MongoDB.FECHA_INICIO_RESERVA));
@@ -175,7 +175,7 @@ public class Reservas implements IReservas {
         if (fecha.isBefore(reserva.getFechaInicioReserva().atStartOfDay()))
             throw new IllegalArgumentException("El CheckIn no puede realizarse antes de la fecha de inicio de la reserva");
         if (fecha.isAfter(reserva.getFechaFinReserva().atStartOfDay()))
-            throw new IllegalArgumentException("No puede hacerse un CheckIn después de la fecha fin de reserva");
+            throw new IllegalArgumentException("No puede hacerse un CheckIn despues de la fecha fin de reserva");
 
 
         MongoDB.getBD().getCollection(COLECCION).updateOne(
@@ -197,7 +197,7 @@ public class Reservas implements IReservas {
         if (fecha.isBefore(reserva.getCheckIn()))
             throw new IllegalArgumentException("No se puede hacer un CheckOut antes de la fecha del CheckIn");
         if (fecha.isAfter(reserva.getFechaFinReserva().atStartOfDay().plusHours(Reserva.MAX_HORAS_POSTERIOR_CHECKOUT)))
-            throw new IllegalArgumentException("El Checkout no puede hacerse después del periodo máximo permitido");
+            throw new IllegalArgumentException("El Checkout no puede hacerse despues del periodo maximo permitido");
 
         MongoDB.getBD().getCollection(COLECCION).updateOne(
                 Filters.and(

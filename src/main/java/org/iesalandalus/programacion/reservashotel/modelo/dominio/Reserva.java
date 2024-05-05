@@ -47,7 +47,7 @@ public class Reserva {
 
     public void setHabitacion(Habitacion habitacion) {
         if (habitacion==null)
-            throw new NullPointerException("habitación nula(set)");
+            throw new NullPointerException("habitacion nula(set)");
 
         if (habitacion instanceof Simple)
             this.habitacion = new Simple((Simple) habitacion);
@@ -78,7 +78,7 @@ public class Reserva {
         if (fechaInicioReserva==null)
             throw new NullPointerException("ERROR: La fecha de inicio de una reserva no puede ser nula.");
         if (fechaInicioReserva.isBefore(LocalDate.now()))
-            throw new IllegalArgumentException("ERROR: La fecha de inicio de la reserva no puede ser anterior al día de hoy.");
+            throw new IllegalArgumentException("ERROR: La fecha de inicio de la reserva no puede ser anterior al dia de hoy.");
         if (fechaInicioReserva.minusMonths(MAX_NUMERO_MESES_RESERVA).isAfter(LocalDate.now()))
             throw new IllegalArgumentException("ERROR: La fecha de inicio de la reserva no puede ser posterior a seis meses.");
 
@@ -126,7 +126,7 @@ public class Reserva {
         if (checkOut.isBefore(checkIn))
             throw new IllegalArgumentException("ERROR: El checkout de una reserva no puede ser anterior al checkin.");
         if (fechaFinReserva.atStartOfDay().plusHours(MAX_HORAS_POSTERIOR_CHECKOUT).isBefore(checkOut))
-            throw new IllegalArgumentException("ERROR: El checkout de una reserva puede ser como máximo 12 horas después de la fecha de fin de la reserva.");
+            throw new IllegalArgumentException("ERROR: El checkout de una reserva puede ser como maximo 12 horas despues de la fecha de fin de la reserva.");
 
         this.checkOut = checkOut;
         setPrecio();
@@ -138,7 +138,7 @@ public class Reserva {
 
     private void setPrecio() {
 
-        //Si tiene checkin y checkout, calculamos por el periodo final de estancia. A las pruebas no les gusta esto, así que lo comento.
+        //Si tiene checkin y checkout, calculamos por el periodo final de estancia. A las pruebas no les gusta esto, asi que lo comento.
         /* if (getCheckIn() != null && getCheckOut() != null) {
             Period period2 = Period.between(getCheckIn().toLocalDate(), getCheckOut().toLocalDate());
             precio = (habitacion.getPrecio() * period2.getDays()) + (regimen.getIncrementoPrecio() * numeroPersonas * period2.getDays());
@@ -154,19 +154,19 @@ public class Reserva {
 
     public void setNumeroPersonas(int numeroPersonas) {
         if (numeroPersonas < 1)
-            throw new IllegalArgumentException("ERROR: El número de personas de una reserva no puede ser menor o igual a 0.");
+            throw new IllegalArgumentException("ERROR: El numero de personas de una reserva no puede ser menor o igual a 0.");
         if (numeroPersonas > habitacion.getNumeroMaximoPersonas())
-            throw new IllegalArgumentException("ERROR: El número de personas de una reserva no puede superar al máximo de personas establacidas para el tipo de habitación reservada."); //hay un pequeño tipo aquí, pero es lo que pide
+            throw new IllegalArgumentException("ERROR: El numero de personas de una reserva no puede superar al maximo de personas establacidas para el tipo de habitacion reservada."); //hay un pequenio tipo aqui, pero es lo que pide
         this.numeroPersonas = numeroPersonas;
     }
 
     public Reserva(Huesped huesped, Habitacion habitacion, Regimen regimen, LocalDate fechaInicioReserva, LocalDate fechaFinReserva, int numeroPersonas){
         if (huesped == null)
-            throw new NullPointerException("ERROR: El huésped de una reserva no puede ser nulo.");
+            throw new NullPointerException("ERROR: El huesped de una reserva no puede ser nulo.");
         if (habitacion==null)
-            throw new NullPointerException("ERROR: La habitación de una reserva no puede ser nula.");
+            throw new NullPointerException("ERROR: La habitacion de una reserva no puede ser nula.");
         if (regimen==null)
-            throw new NullPointerException("ERROR: El régimen de una reserva no puede ser nulo.");
+            throw new NullPointerException("ERROR: El regimen de una reserva no puede ser nulo.");
         if (fechaInicioReserva==null)
             throw new NullPointerException("ERROR: La fecha de inicio de una reserva no puede ser nula.");
         if (fechaFinReserva==null)
@@ -181,7 +181,7 @@ public class Reserva {
         setPrecio();
     }
 
-    public Reserva(Reserva reserva){ //¿Ineficiente volverlo a pasar por las validaciones???
+    public Reserva(Reserva reserva){ //Ineficiente volverlo a pasar por las validaciones???
         if (reserva==null)
             throw new NullPointerException("ERROR: No es posible copiar una reserva nula.");
 
@@ -221,7 +221,7 @@ public class Reserva {
     @Override
     public String toString() {
 
-        return String.format("Huesped: %s %s Habitación:%s Fecha Inicio Reserva: %s Fecha Fin Reserva: %s Checkin: %s Checkout: %s Precio: %.2f Personas: %d",
+        return String.format("Huesped: %s %s Habitacion:%s Fecha Inicio Reserva: %s Fecha Fin Reserva: %s Checkin: %s Checkout: %s Precio: %.2f Personas: %d",
                 getHuesped().getNombre(),
                 getHuesped().getDni(),
                 getHabitacion(),

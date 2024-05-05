@@ -8,43 +8,43 @@ public enum Opcion {
 
         }
     },
-    INSERTAR_HUESPED("Insertar Huésped") {
+    INSERTAR_HUESPED("Insertar Huesped") {
         @Override
         public void ejecutar() {
             vista.insertarHuesped();
         }
     },
-    BUSCAR_HUESPED("Buscar Huésped") {
+    BUSCAR_HUESPED("Buscar Huesped") {
         @Override
         public void ejecutar() {
             vista.buscarHuesped();
         }
     },
-    BORRAR_HUESPED("Borrar Huésped") {
+    BORRAR_HUESPED("Borrar Huesped") {
         @Override
         public void ejecutar() {
             vista.borrarHuesped();
         }
     },
-    MOSTRAR_HUESPEDES("Mostar Huéspedes"){
+    MOSTRAR_HUESPEDES("Mostar Huespedes"){
         @Override
         public void ejecutar() {
             vista.mostrarHuespedes();
         }
     },
-    INSERTAR_HABITACION("Insertar Habitación"){
+    INSERTAR_HABITACION("Insertar Habitacion"){
         @Override
         public void ejecutar() {
             vista.insertarHabitacion();
         }
     },
-    BUSCAR_HABITACION("Buscar Habitación"){
+    BUSCAR_HABITACION("Buscar Habitacion"){
         @Override
         public void ejecutar() {
             vista.buscarHabitacion();
         }
     },
-    BORRAR_HABITACION("Borrar Habitación"){
+    BORRAR_HABITACION("Borrar Habitacion"){
         @Override
         public void ejecutar() {
             vista.borrarHabitacion();
@@ -74,13 +74,13 @@ public enum Opcion {
             vista.mostrarReservas();
         }
     },
-    LISTAR_RESERVAS_HUESPED("Listar Reservas de un huésped"){
+    LISTAR_RESERVAS_HUESPED("Listar Reservas de un huesped"){
         @Override
         public void ejecutar() {
             vista. mostrarReservasHuesped();
         }
     },
-    LISTAR_RESERVAS_TIPO_HABITACION("Listar Reservas de un tipo de habitación"){
+    LISTAR_RESERVAS_TIPO_HABITACION("Listar Reservas de un tipo de habitacion"){
         @Override
         public void ejecutar() {
             vista. mostrarReservasTipoHabitacion();
