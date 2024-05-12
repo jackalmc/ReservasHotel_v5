@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.reservashotel.vista.grafica.controladores.ControladorInsertarHuesped">
+   <children>
+      <GridPane prefHeight="516.0" prefWidth="800.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="229.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="404.0" minHeight="10.0" prefHeight="404.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <TableView fx:id="tvHuespedes" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <columns>
+                  <TableColumn fx:id="tcDni" prefWidth="110.0" text="DNI" />
+                  <TableColumn fx:id="tcNombre" prefWidth="287.0" text="Nombre" />
+               </columns>
+               <GridPane.margin>
+                  <Insets left="10.0" right="10.0" />
+               </GridPane.margin>
+            </TableView>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.rowIndex="2">
+               <children>
+                  <Button fx:id="btnHuInsertar" mnemonicParsing="false" onAction="#actInsertarHuesped" text="Insertar Nuevo Huesped" />
+                  <Button fx:id="btnLimpiar" mnemonicParsing="false" onAction="#actLimpiar" text="Limpiar" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <Button fx:id="btnSalir" alignment="CENTER" mnemonicParsing="false" onAction="#actSalir" text="Salir" />
+               </children>
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
+            </HBox>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" />
+            <GridPane GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="135.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="265.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="28.0">
+                     <children>
+                        <Label text="DNI" />
+                        <Label layoutX="10.0" layoutY="10.0" text="Nombre" />
+                        <Label layoutX="10.0" layoutY="44.0" text="Correo" />
+                        <Label layoutX="10.0" layoutY="27.0" text="Telefono" />
+                        <Label layoutX="10.0" layoutY="61.0" text="Fecha de nacimiento" />
+                     </children>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </VBox>
+                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="20.0" GridPane.columnIndex="1">
+                     <children>
+                        <TextField fx:id="tfHuDni">
+                           <VBox.margin>
+                              <Insets right="100.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="tfHuNombre" />
+                        <TextField fx:id="tfHuCorreo" layoutX="10.0" layoutY="145.0" />
+                        <TextField fx:id="tfHuTelefono" layoutX="10.0" layoutY="120.0">
+                           <VBox.margin>
+                              <Insets right="100.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <DatePicker fx:id="dpHuFechaNac" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="10.0" right="20.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </GridPane>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="63.0" prefWidth="400.0" text="Formulario de registro de un huesped:" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </GridPane>
+   </children>
+</VBox>

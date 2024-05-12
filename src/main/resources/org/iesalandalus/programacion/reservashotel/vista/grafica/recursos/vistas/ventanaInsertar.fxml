@@ -339,11 +339,8 @@
                                     <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="28.0">
                                        <children>
                                           <Label text="DNI" />
-                                          <Label layoutX="10.0" layoutY="10.0" text="Tipo Habitacion">
-                                             <VBox.margin>
-                                                <Insets top="25.0" />
-                                             </VBox.margin>
-                                          </Label>
+                                          <Label text="Planta" />
+                                          <Label text="Puerta" />
                                           <Label layoutX="10.0" layoutY="44.0" text="Regimen" />
                                           <Label text="Numero de personas" />
                                           <Label layoutX="10.0" layoutY="27.0" text="Fecha de Inicio">
@@ -364,11 +361,8 @@
                                                 <Insets right="100.0" />
                                              </VBox.margin>
                                           </TextField>
-                                          <ChoiceBox fx:id="cbResTipo" prefWidth="150.0">
-                                             <VBox.margin>
-                                                <Insets top="25.0" />
-                                             </VBox.margin>
-                                          </ChoiceBox>
+                                          <ChoiceBox fx:id="cbResPlanta" prefWidth="150.0" />
+                                          <ChoiceBox fx:id="cbResPuerta" prefWidth="150.0" />
                                           <ChoiceBox fx:id="cbResRegimen" prefWidth="150.0" />
                                           <ChoiceBox fx:id="cbResPersonas" prefWidth="150.0" />
                                           <DatePicker fx:id="dpResInicio">

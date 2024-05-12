@@ -53,10 +53,17 @@ public class ControladorInsertar {
     private ObservableList<Integer> obsPuerta = FXCollections.observableArrayList();
 
     @FXML    private ChoiceBox<TipoHabitacion> cbHabTipo;
+
+    @FXML    private ChoiceBox<Integer> cbResPlanta;
+    private ObservableList<Integer> obsResPlanta = FXCollections.observableArrayList();
+
+    @FXML    private ChoiceBox<Integer> cbResPuerta;
+    private ObservableList<Integer> obsResPuerta = FXCollections.observableArrayList();
+
+
     @FXML    private ChoiceBox<Regimen> cbResRegimen;
     private ObservableList<Regimen> obsRegimen = FXCollections.observableArrayList();
 
-    @FXML    private ChoiceBox<TipoHabitacion> cbResTipo;
     private ObservableList<TipoHabitacion> obsTipo = FXCollections.observableArrayList();
 
 
@@ -64,7 +71,6 @@ public class ControladorInsertar {
     private ObservableList<Integer> obsPersonas = FXCollections.observableArrayList();
 
     @FXML    private CheckBox chJacuzzi;
-    private ObservableList<Boolean> obsJacuzzi = FXCollections.observableArrayList();
 
     @FXML    private DatePicker dpHuFechaNac;
     @FXML    private DatePicker dpResFin;
@@ -122,13 +128,16 @@ public class ControladorInsertar {
         cbHabBanios.setItems(obsBanios);
         obsCamInd.setAll(0,1,2,3);
         cbHabCamInd.setItems(obsCamInd);
-        obsCamDob.setAll(0,1,2);
+        obsCamDob.setAll(0,1);
         cbCamDob.setItems(obsCamDob);
-        cbResTipo.setItems(obsTipo);
         obsPersonas.setAll(1,2,3,4);
         cbResPersonas.setItems(obsPersonas);
         obsRegimen.setAll(Regimen.values());
         cbResRegimen.setItems(obsRegimen);
+        obsResPlanta.setAll(1,2,3);
+        cbResPlanta.setItems(obsResPlanta);
+        obsResPuerta.setAll(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+        cbResPuerta.setItems(obsResPuerta);
 
         actLimpiar(null);
 
@@ -195,8 +204,8 @@ public class ControladorInsertar {
                 VistaGrafica.getInstancia().getControlador().insertar(habitacionAInsertar);
                 Dialogos.mostrarDialogoInformacion("Habitacion Insertada", "La habitacion ha sido insertada con exito!");
 
-                colReservas= VistaGrafica.getInstancia().getControlador().getReservas();
-                obsReservas.setAll(colReservas);
+                colHabitaciones= VistaGrafica.getInstancia().getControlador().getHabitaciones();
+                obsHabitaciones.setAll(colHabitaciones);
 
             }catch(IllegalArgumentException | NullPointerException | OperationNotSupportedException  e){
                 Dialogos.mostrarDialogoError("Error al insertar", e.getMessage());
@@ -227,16 +236,15 @@ public class ControladorInsertar {
 
     @FXML
     void actInsertarReservar(ActionEvent event) {
-        cbResTipo.getValue();
 
         if(Dialogos.mostrarDialogoConfirmacion("Insertar Reserva", "Seguro que quiere introducir esta reserva?")){
             try{
                 VistaGrafica.getInstancia().getControlador().insertar(
-                        new Reserva(VistaGrafica.getInstancia().getControlador().buscar(new Huesped(tfResDni.getText(),"dummy","asdf@fdsa.com","951161616",LocalDate.of(2000,10,10))),
-                                VistaGrafica.getInstancia().getControlador().buscar(new Simple(0,0,0)),
+                        new Reserva(VistaGrafica.getInstancia().getControlador().buscar(new Huesped("dummy",tfResDni.getText().trim().toUpperCase(),"asdf@fdsa.com","951161616",LocalDate.of(2000,10,10))),
+                                VistaGrafica.getInstancia().getControlador().buscar(new Simple(cbResPlanta.getSelectionModel().getSelectedItem(),cbResPuerta.getSelectionModel().getSelectedItem(),80)),
                                 cbResRegimen.getSelectionModel().getSelectedItem(),
-                                dpResFin.getValue(),
                                 dpResInicio.getValue(),
+                                dpResFin.getValue(),
                                 cbResPersonas.getSelectionModel().getSelectedItem()
 
                         ));
@@ -263,7 +271,8 @@ public class ControladorInsertar {
         tfResDni.clear();
         cbResRegimen.getSelectionModel().selectFirst();
         cbResPersonas.getSelectionModel().selectFirst();
-        cbResTipo.getSelectionModel().selectFirst();
+        cbResPlanta.getSelectionModel().selectFirst();
+        cbResPuerta.getSelectionModel().selectFirst();
         cbCamDob.getSelectionModel().selectFirst();
         cbHabCamInd.getSelectionModel().selectFirst();
         cbHabBanios.getSelectionModel().selectFirst();

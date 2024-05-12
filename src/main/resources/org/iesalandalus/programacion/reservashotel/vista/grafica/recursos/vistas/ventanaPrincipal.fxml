@@ -291,7 +291,7 @@
                                           <TableColumn fx:id="tcResFechaInic" prefWidth="104.0" text="Fecha Inicio" />
                                           <TableColumn fx:id="tcResFechaFin" prefWidth="96.0" text="Fecha Fin" />
                                           <TableColumn fx:id="tcCheckIn" prefWidth="85.0" text="Checkin" />
-                                          <TableColumn fx:id="tcCheckOut" prefWidth="74.0" text="Checkoout" />
+                                          <TableColumn fx:id="tcCheckOut" prefWidth="74.0" text="Checkout" />
                                        </columns>
                                        <VBox.margin>
                                           <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -301,6 +301,8 @@
                                              <items>
                                                 <MenuItem fx:id="menuInsertarReserva" mnemonicParsing="false" onAction="#cmInsertarReserva" text="Insertar" />
                                                 <MenuItem fx:id="menuBorrarReserva" mnemonicParsing="false" onAction="#cmBorrarReserva" text="Borrar" />
+                                                <MenuItem fx:id="menuRealizarCheckIn" mnemonicParsing="false" onAction="#cmReservaCheckIn" text="Realizar Check-In" />
+                                                <MenuItem fx:id="menuRealizarCheckOut" mnemonicParsing="false" onAction="#cmReservaCheckOut" text="Realizar Check-Out" />
                                              </items>
                                           </ContextMenu>
                                        </contextMenu>
