@@ -36,20 +36,17 @@
                <items>
                 <Menu mnemonicParsing="false" text="Huespedes">
                   <items>
-                        <MenuItem fx:id="menuInsertarHu" mnemonicParsing="false" onAction="#actAbrirInsertar" text="Insertar" />
-                    <MenuItem fx:id="menuBorrarHu" mnemonicParsing="false" onAction="#actAbrirBorrar" text="Borrar" />
+                        <MenuItem fx:id="menuInsertarHu" mnemonicParsing="false" onAction="#cmInsertarHuesped" text="Insertar" />
                   </items>
                 </Menu>
                   <Menu mnemonicParsing="false" text="Habitaciones">
                      <items>
-                        <MenuItem fx:id="menuInsertarHab" mnemonicParsing="false" onAction="#actAbrirInsertar" text="Insertar" />
-                        <MenuItem fx:id="menuBorrarHab" mnemonicParsing="false" onAction="#actAbrirBorrar" text="Borrar" />
+                        <MenuItem fx:id="menuInsertarHab" mnemonicParsing="false" onAction="#cmInsertarHabitacion" text="Insertar" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Reservas">
                      <items>
-                        <MenuItem fx:id="menuInsertarRes" mnemonicParsing="false" onAction="#actAbrirInsertar" text="Insertar" />
-                        <MenuItem fx:id="menuBorrarRes" mnemonicParsing="false" onAction="#actAbrirBorrar" text="Borrar" />
+                        <MenuItem fx:id="menuInsertarRes" mnemonicParsing="false" onAction="#cmInsertarReserva" text="Insertar" />
                      </items>
                   </Menu>
                </items>

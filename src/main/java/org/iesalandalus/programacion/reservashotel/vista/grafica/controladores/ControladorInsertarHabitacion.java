@@ -121,6 +121,7 @@ public class ControladorInsertarHabitacion {
             }
         }else{
             Dialogos.mostrarDialogoInformacion("Insertar cancelado", "La introduccion de la habitacion ha sido cancelada");
+            ((Stage)btnSalir1.getScene().getWindow()).close();
         }
     }
 

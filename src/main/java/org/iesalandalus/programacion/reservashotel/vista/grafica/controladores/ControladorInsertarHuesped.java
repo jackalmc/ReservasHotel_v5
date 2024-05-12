@@ -68,6 +68,8 @@ public class ControladorInsertarHuesped {
             }
         }else{
             Dialogos.mostrarDialogoInformacion("Insertar cancelado", "La introduccion del Huesped ha sido cancelada");
+            ((Stage)btnSalir.getScene().getWindow()).close();
+
         }
     }
 

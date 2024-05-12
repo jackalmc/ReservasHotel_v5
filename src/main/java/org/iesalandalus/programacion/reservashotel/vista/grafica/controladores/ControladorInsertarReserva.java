@@ -103,6 +103,7 @@ public class ControladorInsertarReserva {
             }
         }else{
             Dialogos.mostrarDialogoInformacion("Insertar cancelado", "La introduccion de la reserva ha sido cancelada");
+            ((Stage)btnSalir2.getScene().getWindow()).close();
         }
     }
 
