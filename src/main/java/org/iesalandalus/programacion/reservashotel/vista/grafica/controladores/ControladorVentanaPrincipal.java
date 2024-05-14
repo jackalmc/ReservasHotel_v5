@@ -121,6 +121,11 @@ public class ControladorVentanaPrincipal {
         tcResTipo.setCellValueFactory(reserva-> new SimpleStringProperty(reserva.getValue().getHabitacion().getClass().getSimpleName()));
         tcCheckIn.setCellValueFactory(reserva-> new SimpleStringProperty(lambdaCheckIn(reserva)));
         tcCheckOut.setCellValueFactory(reserva-> new SimpleStringProperty(lambdaCheckOut(reserva)));
+
+        //Listeners
+        tfHuFiltrado.textProperty().addListener((obs,oldValue,newValue) -> actFiltrarHu(newValue));
+        tfHabFiltrado.textProperty().addListener((obs,oldValue,newValue) -> actFiltrarHab(newValue));
+        tfResFiltrado.textProperty().addListener((obs,oldValue,newValue) -> actFiltrarRes(newValue));
     }
 
     private String lambdaCheckOut(TableColumn.CellDataFeatures<Reserva, String> reserva) {
@@ -215,19 +220,73 @@ public class ControladorVentanaPrincipal {
     }
 
     @FXML
-    void actBuscar(ActionEvent event) {
-
+    void actBuscarHuesped(ActionEvent event) {
+        if (tfHuBuscar.getText().isEmpty())
+            listaHuespedes.setPredicate(huesped -> true);
+        else {
+            listaHuespedes.setPredicate(huesped -> {
+                return huesped.getDni().equalsIgnoreCase(tfHuBuscar.getText().trim());
+            });
+        }
     }
 
     @FXML
     void actBuscarHabitaciones(ActionEvent event) {
-
+        if (tfHabBuscar.getText().isEmpty())
+            listaHabitaciones.setPredicate(habitacion -> true);
+        else{
+            listaHabitaciones.setPredicate(habitacion -> {
+                return habitacion.getIdentificador().equalsIgnoreCase(tfHabBuscar.getText());
+            });
+        }
     }
 
     @FXML
     void actBuscarReservas(ActionEvent event) {
-
+        if (tfResBuscar.getText().isEmpty())
+            listaReservas.setPredicate(reserva -> true);
+        else{
+            listaReservas.setPredicate(reserva -> {
+                return reserva.getHabitacion().getIdentificador().equalsIgnoreCase(tfResBuscar.getText().trim())||
+                        reserva.getHuesped().getDni().equalsIgnoreCase(tfResBuscar.getText().trim());
+            });
+        }
     }
+
+    @FXML
+    void actFiltrarHab(String newValue) {
+        if (newValue.isEmpty())
+            listaHabitaciones.setPredicate(habitacion -> true);
+        else{
+            listaHabitaciones.setPredicate(habitacion -> {
+                return habitacion.getIdentificador().contains(newValue);
+            });
+        }
+    }
+
+    @FXML
+    void actFiltrarHu(String newValue) {
+        if (newValue.isEmpty())
+            listaHuespedes.setPredicate(huesped -> true);
+        else {
+            listaHuespedes.setPredicate(huesped -> {
+                return huesped.getDni().contains(newValue.toUpperCase()) || huesped.getNombre().toLowerCase().contains(newValue.toLowerCase());
+            });
+        }
+    }
+
+    @FXML
+    void actFiltrarRes(String newValue) {
+            if (newValue.isEmpty())
+                listaReservas.setPredicate(reserva -> true);
+            else{
+                listaReservas.setPredicate(reserva -> {
+                    return reserva.getHabitacion().getIdentificador().contains(newValue)||
+                            reserva.getHuesped().getNombre().toLowerCase().contains(newValue.toLowerCase())||
+                            reserva.getHuesped().getDni().contains(newValue.toUpperCase());
+                });
+            }
+        }
 
     @FXML
     void actSobre(ActionEvent event) {

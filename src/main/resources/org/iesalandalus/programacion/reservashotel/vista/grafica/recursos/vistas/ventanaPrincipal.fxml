@@ -91,7 +91,7 @@
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
                                     <Button fx:id="btnSimpleInsertar" mnemonicParsing="false" onAction="#actAbrirInsertar" text="Insertar registros" />
-                                    <Button fx:id="btnSimpleBorrar" mnemonicParsing="false" onAction="#actAbrirBorrar" text="Borrar registros" />
+                                    <Button fx:id="btnSimpleBorrar" disable="true" mnemonicParsing="false" onAction="#actAbrirBorrar" text="Borrar registros" />
                                  </children>
                                  <GridPane.margin>
                                     <Insets top="40.0" />
@@ -129,12 +129,12 @@
                                           <Insets left="10.0" />
                                        </HBox.margin>
                                     </TextField>
-                                    <TextField fx:id="tfHuBuscar" prefHeight="25.0" prefWidth="182.0">
+                                    <TextField fx:id="tfHuBuscar" prefHeight="25.0" prefWidth="182.0" promptText="Buscar por DNI...">
                                        <HBox.margin>
                                           <Insets left="200.0" />
                                        </HBox.margin>
                                     </TextField>
-                                    <Button fx:id="btnHuBuscar" mnemonicParsing="false" onAction="#actBuscar" text="Button">
+                                    <Button fx:id="btnHuBuscar" mnemonicParsing="false" onAction="#actBuscarHuesped" text="Buscar">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
@@ -194,12 +194,12 @@
                                           <Insets left="10.0" />
                                        </HBox.margin>
                                     </TextField>
-                                    <TextField fx:id="tfHabBuscar" prefHeight="25.0" prefWidth="182.0">
+                                    <TextField fx:id="tfHabBuscar" prefHeight="25.0" prefWidth="182.0" promptText="Buscar por ID...">
                                        <HBox.margin>
                                           <Insets left="200.0" />
                                        </HBox.margin>
                                     </TextField>
-                                    <Button fx:id="btnHabBuscar" mnemonicParsing="false" onAction="#actBuscarHabitaciones" text="Button">
+                                    <Button fx:id="btnHabBuscar" mnemonicParsing="false" onAction="#actBuscarHabitaciones" text="Buscar">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
@@ -261,12 +261,12 @@
                                           <Insets left="10.0" />
                                        </HBox.margin>
                                     </TextField>
-                                    <TextField fx:id="tfResBuscar" prefHeight="25.0" prefWidth="182.0">
+                                    <TextField fx:id="tfResBuscar" prefHeight="25.0" prefWidth="182.0" promptText="Buscar por DNI o ID...">
                                        <HBox.margin>
                                           <Insets left="200.0" />
                                        </HBox.margin>
                                     </TextField>
-                                    <Button fx:id="btnResBuscar" mnemonicParsing="false" onAction="#actBuscarReservas" text="Button">
+                                    <Button fx:id="btnResBuscar" mnemonicParsing="false" onAction="#actBuscarReservas" text="Buscar">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>

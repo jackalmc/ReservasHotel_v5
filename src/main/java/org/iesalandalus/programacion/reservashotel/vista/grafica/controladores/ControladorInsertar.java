@@ -1,6 +1,5 @@
 package org.iesalandalus.programacion.reservashotel.vista.grafica.controladores;
 
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -84,15 +83,14 @@ public class ControladorInsertar {
     @FXML    private TableColumn<Reserva, String> tcResFin;
     @FXML    private TableColumn<Reserva, String> tcResId;
     @FXML    private TableColumn<Reserva, String> tcResInicio;
-    @FXML    private TextField tfHabFiltrar;
+
     @FXML    private TextField tfHabPrecio;
     @FXML    private TextField tfHuCorreo;
     @FXML    private TextField tfHuDni;
-    @FXML    private TextField tfHuFiltrar;
+
     @FXML    private TextField tfHuNombre;
     @FXML    private TextField tfHuTelefono;
     @FXML    private TextField tfResDni;
-    @FXML    private TextField tfResFiltrar;
 
     //Habitaciones
     @FXML    private TableView<Habitacion> tvHabitaciones;
