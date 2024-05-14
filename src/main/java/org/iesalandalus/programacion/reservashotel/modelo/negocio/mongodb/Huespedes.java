@@ -72,6 +72,8 @@ public class Huespedes implements IHuespedes {
             throw new NullPointerException("No se puede borrar un huesped nulo");
         if (buscar(huesped) == null)
             throw new IllegalArgumentException("No existe ese huesped en la BD");
+        if (MongoDB.getBD().getCollection("reservas").find(Filters.eq(MongoDB.HUESPED_DNI, huesped.getDni())).first()!=null)
+            throw new IllegalArgumentException("No se puede borrar un huesped con reservas");
 
         MongoDB.getBD().getCollection(COLECCION).deleteOne(Filters.eq(MongoDB.DNI, huesped.getDni()));
     }

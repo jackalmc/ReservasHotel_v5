@@ -283,10 +283,10 @@
                                           <TableColumn fx:id="tcResDNI" prefWidth="90.0" text="DNI" />
                                           <TableColumn fx:id="tcResNombre" prefWidth="143.0" text="Nombre" />
                                           <TableColumn fx:id="tcResId" minWidth="0.0" prefWidth="79.0" text="Identificador" />
-                                          <TableColumn fx:id="tcResTipo" prefWidth="140.0" text="Tipo" />
-                                          <TableColumn fx:id="tcResRegimen" prefWidth="103.0" text="Regimen" />
-                                          <TableColumn fx:id="tcResFechaInic" prefWidth="104.0" text="Fecha Inicio" />
-                                          <TableColumn fx:id="tcResFechaFin" prefWidth="96.0" text="Fecha Fin" />
+                                          <TableColumn fx:id="tcResTipo" prefWidth="97.0" text="Tipo" />
+                                          <TableColumn fx:id="tcResRegimen" prefWidth="123.0" text="Regimen" />
+                                          <TableColumn fx:id="tcResFechaInic" prefWidth="111.0" text="Fecha Inicio" />
+                                          <TableColumn fx:id="tcResFechaFin" prefWidth="112.0" text="Fecha Fin" />
                                           <TableColumn fx:id="tcCheckIn" prefWidth="85.0" text="Checkin" />
                                           <TableColumn fx:id="tcCheckOut" prefWidth="74.0" text="Checkout" />
                                        </columns>

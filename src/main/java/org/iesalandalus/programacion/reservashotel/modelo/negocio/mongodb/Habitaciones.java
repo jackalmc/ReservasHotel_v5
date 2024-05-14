@@ -87,6 +87,8 @@ public class Habitaciones implements IHabitaciones {
             throw new NullPointerException("No se puede borrar un huesped nulo");
         if (buscar(habitacion) == null)
             throw new IllegalArgumentException("No existe ese huesped en la BD");
+        if (MongoDB.getBD().getCollection("reservas").find(Filters.eq(MongoDB.HABITACION_IDENTIFICADOR, habitacion.getIdentificador())).first()!=null)
+            throw new IllegalArgumentException("No se puede borrar una habitacion con reservas");
 
         MongoDB.getBD().getCollection(COLECCION).deleteOne(Filters.eq(MongoDB.IDENTIFICADOR,habitacion.getIdentificador()));
 

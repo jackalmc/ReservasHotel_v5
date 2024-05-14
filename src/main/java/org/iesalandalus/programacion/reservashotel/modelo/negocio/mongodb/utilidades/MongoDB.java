@@ -92,7 +92,7 @@ public class MongoDB {
 
         return new Document()
                 .append(NOMBRE, huesped.getNombre())
-                .append(DNI, huesped.getDni())
+                .append(DNI, huesped.getDni().toUpperCase())
                 .append(TELEFONO, huesped.getTelefono())
                 .append(CORREO, huesped.getCorreo())
                 .append(FECHA_NACIMIENTO, huesped.getFechaNacimiento().format(FORMATO_DIA));
@@ -104,7 +104,7 @@ public class MongoDB {
 
         return new Huesped(
                 documentoHuesped.getString(NOMBRE),
-                documentoHuesped.getString(DNI),
+                documentoHuesped.getString(DNI).toUpperCase(),
                 documentoHuesped.getString(CORREO),
                 documentoHuesped.getString(TELEFONO),
                 LocalDate.parse(documentoHuesped.getString(FECHA_NACIMIENTO), FORMATO_DIA)
