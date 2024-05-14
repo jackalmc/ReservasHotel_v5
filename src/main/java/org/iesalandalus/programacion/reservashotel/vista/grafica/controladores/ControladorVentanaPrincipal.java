@@ -34,6 +34,8 @@ public class ControladorVentanaPrincipal {
     @FXML    private MenuItem menuHabInsertar;
     @FXML    private MenuItem menuHuBorrar;
     @FXML    private MenuItem menuHuInsertar;
+    @FXML    private MenuItem cmHabBuscarReservas;
+    @FXML    private MenuItem cmHuBuscarReservas;
     @FXML    private MenuItem menuInsertar;
     @FXML    private MenuItem menuInsertarReserva;
     @FXML    private MenuItem menuSalir;
@@ -484,11 +486,13 @@ public class ControladorVentanaPrincipal {
             FXMLLoader fxmlLoader = new FXMLLoader(LocalizadorRecursos.class.getResource("vistas/ventanaCheckOut.fxml"));
             try {
                 Parent raiz = fxmlLoader.load();
-                ControladorCheckOut c = fxmlLoader.getController();
-                c.prepararVentana(tvReservas.getSelectionModel().getSelectedItem());
 
                 Scene escena = new Scene(raiz);
                 Stage escenario = new Stage();
+
+                ControladorCheckOut c = fxmlLoader.getController();
+                c.prepararVentana(tvReservas.getSelectionModel().getSelectedItem());
+
                 escenario.setScene(escena);
                 escenario.initModality(Modality.APPLICATION_MODAL);
                 escenario.setTitle("Realizar Check-in");
@@ -497,6 +501,60 @@ public class ControladorVentanaPrincipal {
 
                 obsReservas.setAll(VistaGrafica.getInstancia().getControlador().getReservas());
                 tvReservas.setItems(listaReservas);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+    @FXML
+    void actHabBuscarReservas(ActionEvent event) {
+        Habitacion habABuscar = tvHabitaciones.getSelectionModel().getSelectedItem();
+        if (habABuscar == null){
+            event.consume();
+        } else {
+            FXMLLoader fxmlLoader = new FXMLLoader(LocalizadorRecursos.class.getResource("vistas/ventanaHabBuscarReservas.fxml"));
+
+            try {
+                Parent raiz = fxmlLoader.load();
+
+                Scene escena = new Scene(raiz);
+                Stage escenario = new Stage();
+
+                ControladorHabBuscarReservas b = fxmlLoader.getController();
+                b.prepararHab(habABuscar);
+
+                escenario.setScene(escena);
+                escenario.initModality(Modality.NONE);
+                escenario.setTitle("Buscar Reservas de la habitacion");
+                escenario.setResizable(false);
+                escenario.show();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    void actHuBuscarReservas(ActionEvent event) {
+        Huesped huABuscar = tvHuespedes.getSelectionModel().getSelectedItem();
+        if (huABuscar == null){
+            event.consume();
+        } else {
+            FXMLLoader fxmlLoader = new FXMLLoader(LocalizadorRecursos.class.getResource("vistas/ventanaHuBuscarReservas.fxml"));
+
+            try {
+                Parent raiz = fxmlLoader.load();
+                Scene escena = new Scene(raiz);
+                Stage escenario = new Stage();
+
+                ControladorHuBuscarReservas c = fxmlLoader.getController();
+                c.prepararHu(huABuscar);
+
+                escenario.setScene(escena);
+                escenario.initModality(Modality.NONE);
+                escenario.setTitle("Buscar Reservas del huesped");
+                escenario.setResizable(false);
+                escenario.show();
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }

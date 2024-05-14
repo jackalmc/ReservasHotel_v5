@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="734.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.reservashotel.vista.grafica.controladores.ControladorHuBuscarReservas">
+   <children>
+      <TableView fx:id="tvReservas" prefHeight="611.0" prefWidth="916.0">
+         <columns>
+            <TableColumn fx:id="tcResId" minWidth="0.0" prefWidth="86.0" text="Identificador" />
+            <TableColumn fx:id="tcResTipo" prefWidth="88.0" text="Tipo" />
+            <TableColumn fx:id="tcResRegimen" prefWidth="101.0" text="Regimen" />
+            <TableColumn fx:id="tcResFechaInic" prefWidth="98.0" text="Fecha Inicio" />
+            <TableColumn fx:id="tcResFechaFin" prefWidth="92.0" text="Fecha Fin" />
+            <TableColumn fx:id="tcCheckIn" prefWidth="130.0" text="Checkin" />
+            <TableColumn fx:id="tcCheckOut" prefWidth="138.0" text="Checkout" />
+         </columns>
+      </TableView>
+   </children>
+</VBox>

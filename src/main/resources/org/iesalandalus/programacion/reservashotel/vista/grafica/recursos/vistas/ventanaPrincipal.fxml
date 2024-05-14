@@ -162,6 +162,7 @@
                                             <items>
                                               <MenuItem fx:id="menuHuInsertar" mnemonicParsing="false" onAction="#cmInsertarHuesped" text="Insertar" />
                                                 <MenuItem fx:id="menuHuBorrar" mnemonicParsing="false" onAction="#cmBorrarHuesped" text="Borrar" />
+                                                <MenuItem fx:id="cmHuBuscarReservas" mnemonicParsing="false" onAction="#actHuBuscarReservas" text="Buscar Reservas" />
                                             </items>
                                           </ContextMenu>
                                        </contextMenu>
@@ -229,6 +230,7 @@
                                              <items>
                                                 <MenuItem fx:id="menuHabInsertar" mnemonicParsing="false" onAction="#cmInsertarHabitacion" text="Insertar" />
                                                 <MenuItem fx:id="menuHabBorrar" mnemonicParsing="false" onAction="#cmBorrarHabitacion" text="Borrar" />
+                                                <MenuItem fx:id="cmHabBuscarReservas" mnemonicParsing="false" onAction="#actHabBuscarReservas" text="Buscar Reservas" />
                                              </items>
                                           </ContextMenu>
                                        </contextMenu>
